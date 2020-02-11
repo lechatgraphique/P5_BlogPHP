@@ -68,7 +68,6 @@ class Post
         return $this->id;
     }
 
-
     /**
      * @return string
      */
