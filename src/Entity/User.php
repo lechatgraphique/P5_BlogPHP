@@ -42,7 +42,7 @@ class User
     private $disabled;
 
     /**
-     * @var enum('USER','ADMINISTRATOR')
+     * @var string ('USER','ADMINISTRATOR')
      */
     private $role;
 
@@ -168,18 +168,18 @@ class User
     }
 
     /**
-     * @return enum
+     * @return string
      */
-    public function getRole(): enum
+    public function getRole(): string
     {
         return $this->role;
     }
 
     /**
-     * @param enum $role
-     * @return 
+     * @param string $role
+     * @return string
      */
-    public function setRole(enum $role)
+    public function setRole($role): string
     {
         $this->role = $role;
         return $this;
