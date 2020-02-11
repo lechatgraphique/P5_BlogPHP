@@ -17,9 +17,14 @@ class Post
     private $user_id;
 
     /**
-     * @var
+     * @var object
      */
     private $author;
+
+    /**
+     * @var int
+     */
+    private $category_id;
 
     /**
      * @var string
@@ -121,19 +126,38 @@ class Post
         $this->author = $author;
         return $this;
     }
+
     /**
-     * @return string
+     * @return int
      */
-    public function getCategory(): string
+    public function getCategoryId(): int
+    {
+        return $this->category_id;
+    }
+
+    /**
+     * @param int $categoryId
+     * @return int
+     */
+    public function setCategoryId($categoryId): int
+    {
+        $this->category_id = $categoryId;
+        return $this;
+    }
+
+    /**
+     * @return
+     */
+    public function getCategory()
     {
         return $this->category;
     }
 
     /**
-     * @param string $category
-     * @return string
+     * @param  $category
+     * @return
      */
-    public function setCategory(string $category): string
+    public function setCategory($category)
     {
         $this->category = $category;
         return $this;

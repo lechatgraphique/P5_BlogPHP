@@ -30,6 +30,9 @@ class PostRepository
         {
             $userRepository = new UserRepository();
             $post->setAuthor($userRepository->find($post->getUserId())); // Créer une function plus tard
+
+            $categoryRepository = new CategoryRepository();
+            $post->setCategory($categoryRepository->find($post->getCategoryId()));
         }
 
         return $posts;
@@ -47,6 +50,10 @@ class PostRepository
 
         $userRepository = new UserRepository();
         $post->setAuthor($userRepository->find($post->getUserId()));  // Créer une function plus tard
+
+        $categoryRepository = new CategoryRepository();
+        $post->setCategory($categoryRepository->find($post->getCategoryId()));
+
 
         return $post;
     }

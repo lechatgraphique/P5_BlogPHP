@@ -23,9 +23,11 @@
                     <div class="card h-100">
                         <img class="card-img-top" src="http://placehold.it/300x200" alt="">
                         <div class="card-body">
-                            <a href="articles/{{ post.slug }}-{{ post.id }}"><h4 class="card-title">{{ post.title}}</h4></a>
-                            <p class="card-text">{{ post.description | truncate(100)}}</p>
-                            <small><i class="fas fa-tags"></i> <a class=" btn-link text-dark" href="#" role="button">PHP</a></small>
+                            <a href="articles/{{ post.slug }}-{{ post.id }}"><h4 class="card-title">{{ post.title }}</h4></a>
+                            <p class="card-text">{{ post.description | truncate(100) }}</p>
+                            <small>
+                                <i class="fas fa-tags"></i> <a class=" btn-link text-dark" href="#" role="button">{{ post.category.title }}</a>
+                            </small>
                         </div>
                         <div class="card-footer">
                             <small><div>Publié par <b>{{ post.author.firstName }} {{ post.author.lastName }}</b></div></small>
