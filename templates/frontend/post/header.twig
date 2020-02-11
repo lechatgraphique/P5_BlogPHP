@@ -8,7 +8,7 @@
                 </p>
                 <hr>
                 <small class="text-white-50">
-                    Publié par <b>Bastien CLEMENT</b> <br>
+                    Publié par <b>{{ post.author.firstName }} {{ post.author.lastName }}</b> <br>
                     <i class="far fa-calendar-alt"></i> {{ post.createdAt | dateFR }} | <i class="far fa-comments"></i> 3 Commentaires
                 </small>
             </div>

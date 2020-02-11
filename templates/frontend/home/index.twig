@@ -21,7 +21,7 @@
                         <small><i class="fas fa-tags"></i> <a class=" btn-link text-dark" href="#" role="button">PHP</a></small>
                     </div>
                     <div class="card-footer">
-                        <small><div>Publié par <b>Bastien CLEMENT</b></div></small>
+                        <small><div>Publié par <b>{{ post.author.firstName }} {{ post.author.lastName }}</b></div></small>
                         <small><i class="far fa-calendar-alt"></i> {{ post.createdAt | dateFR }} | <i class="far fa-comments"></i> 3</small>
                     </div>
                 </div>

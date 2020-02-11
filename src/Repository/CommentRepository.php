@@ -4,6 +4,7 @@
 namespace App\Repository;
 
 
+use App\Connector\DBConnexion;
 use PDO;
 
 class CommentRepository

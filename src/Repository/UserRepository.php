@@ -4,6 +4,8 @@
 namespace App\Repository;
 
 
+use App\Connector\DBConnexion;
+use App\Entity\User;
 use PDO;
 
 class UserRepository
@@ -15,9 +17,9 @@ class UserRepository
         $this->db = DBConnexion::dbConnect();
     }
 
-    public function findAll()
+    public function findAll(): array
     {
-        $req = $this->db->query('SELECT * FROM user ORDER BY created_at DESC LIMIT 0, 5');
+        $req = $this->db->query('SELECT * FROM user');
 
         $req->execute();
         $req->setFetchMode(PDO::FETCH_CLASS,'App\Entity\User');
@@ -25,7 +27,7 @@ class UserRepository
         return $req->fetchAll();
     }
 
-    public function find($id)
+    public function find(int $id): User
     {
         $req = $this->db->prepare('SELECT * FROM user WHERE id = :id');
 

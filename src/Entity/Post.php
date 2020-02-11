@@ -11,7 +11,15 @@ class Post
      */
     private $id;
 
-    // private $author; (implementation plus tard)
+    /**
+     * @var int
+     */
+    private $user_id;
+
+    /**
+     * @var
+     */
+    private $author;
 
     /**
      * @var string
@@ -68,6 +76,51 @@ class Post
         return $this->id;
     }
 
+    /**
+     * @param int $id
+     * @return int
+     */
+    public function setId(int $id): int
+    {
+        $this->id = $id;
+        return $this;
+    }
+
+    /**
+     * @return int
+     */
+    public function getUserId(): int
+    {
+        return $this->user_id;
+    }
+
+    /**
+     * @param int $user_id
+     * @return int
+     */
+    public function setUserId(int $user_id): int
+    {
+        $this->user_id = $user_id;
+        return $this;
+    }
+
+    /**
+     * @return
+     */
+    public function getAuthor()
+    {
+        return $this->author;
+    }
+
+    /**
+     * @param  $author
+     * @return
+     */
+    public function setAuthor( $author)
+    {
+        $this->author = $author;
+        return $this;
+    }
     /**
      * @return string
      */
