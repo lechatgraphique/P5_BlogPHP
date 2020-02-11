@@ -1,0 +1,67 @@
+{% extends 'layouts/default.twig' %}
+
+{% block title %}
+    <title>Blog PHP : Contact</title>
+{% endblock %}
+
+{% block content %}
+
+    {% include 'frontend/contact/header.twig' %}
+
+    <section class="container mt-5 mb-5 pt-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 col-sm-12 col-lg-8 mb-4">
+                    <div class="card">
+                        <div class="card-header"><i class="fa fa-envelope"></i>
+                        </div>
+                        <div class="card-body">
+                            <form action="#" method="POST">
+                                <div class="form-group">
+                                    <label for="name">Nom</label>
+                                    <input type="text" class="form-control" id="name" name="name" aria-describedby="emailHelp" placeholder="Entrer nom" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="email">Email</label>
+                                    <input type="email" class="form-control" id="email" name="to" aria-describedby="emailHelp" placeholder="Entrer email" required>
+                                    <small id="emailHelp" class="form-text text-muted">Je ne partage jamais votre e-mail avec quelqu'un d'autre.</small>
+                                </div>
+                                <div class="form-group">
+                                    <label for="email">Sujet</label>
+                                    <input type="text" class="form-control" id="email" name="subject" aria-describedby="emailHelp" placeholder="Entrer email" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="message">Message</label>
+                                    <textarea class="form-control" id="message" name="message" rows="6" required></textarea>
+                                </div>
+                                <div class="mx-auto">
+                                    <button type="submit" class="btn btn-primary text-right">Envoyer</button></div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-12 col-md-12 col-lg-4">
+                    <div class="card bg-light mb-3">
+                        <div class="card-header text-uppercase"><i class="fa fa-home"></i></div>
+                        <div class="card-body">
+                            <address>
+                                <strong>LECHATGRAPHIQUE</strong>
+                                <br>1 Rue de Mora,
+                                <br>Enghien-les-Bains, 95880
+                                <br>
+                            </address>
+                            <address>
+                                <abbr title="Phone"><i class="fas fa-phone"></i></abbr>
+                                (+33) 6 64 83 28 68
+                                <br>
+                                <abbr title="Email"><i class="fas fa-envelope"></i></abbr>
+                                <a href="mailto:#">hello@lechatgraphique.fr</a>
+                            </address>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+{% endblock %}
