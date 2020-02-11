@@ -2,14 +2,14 @@
     <div class="container h-100">
         <div class="row h-100 align-items-center">
             <div class="col-lg-12">
-                <h1 class="display-4 text-white mt-5 mb-2">Titre de l'article</h1>
+                <h1 class="display-4 text-white mt-5 mb-2">{{ post.title }}</h1>
                 <p class="lead mb-5 text-white-50">
-                    Description
+                    {{ post.description}}
                 </p>
                 <hr>
                 <small class="text-white-50">
                     Publié par <b>Bastien CLEMENT</b> <br>
-                    <i class="far fa-calendar-alt"></i> 3 Janvier 2020 14:20 | <i class="far fa-comments"></i> 3 Commentaires
+                    <i class="far fa-calendar-alt"></i> {{ post.createdAt | dateFR }} | <i class="far fa-comments"></i> 3 Commentaires
                 </small>
             </div>
         </div>

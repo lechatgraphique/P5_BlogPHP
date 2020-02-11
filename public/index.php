@@ -11,21 +11,37 @@ $loader = new \Twig\Loader\FilesystemLoader('../templates');
 $twig = new \Twig\Environment($loader, [
     'debug' => true,
 ]);
+
 $twig->addExtension(new \Twig\Extension\DebugExtension());
+$twig->addExtension(new \App\Libs\twigFiltersExtensions());
 
 $router = new AltoRouter();
 
 $router->map( 'GET', '/', function() use ($twig) {
 
-    echo $twig->render('frontend/home/index.twig', []);
+$postController = new \App\Controller\PostController();
+$posts = $postController->listPosts();
+
+echo $twig->render('frontend/home/index.twig', ['posts' => $posts]);
+
 });
 
-$router->map( 'GET', '/posts', function() use ($twig) {
-    echo $twig->render('frontend/post/index.twig', []);
+$router->map( 'GET', '/articles', function() use ($twig) {
+
+    $postController = new \App\Controller\PostController();
+    $posts = $postController->listPosts();
+
+    echo $twig->render('frontend/post/index.twig', ["posts" => $posts]);
+
 });
 
-$router->map( 'GET', '/post', function() use ($twig) {
-    echo $twig->render('frontend/post/show.twig', []);
+$router->map( 'GET', '/articles/[*:slug]-[i:id]', function($slug, $id) use ($twig) {
+
+    $postController = new \App\Controller\PostController();
+    $post = $postController->post($id);
+
+    echo $twig->render('frontend/post/show.twig', ['post' => $post]);
+
 });
 
 $router->map( 'GET', '/contact', function() use ($twig) {
@@ -34,8 +50,13 @@ $router->map( 'GET', '/contact', function() use ($twig) {
 
 $match = $router->match();
 
-if( is_array($match) && is_callable( $match['target'] ) ) {
-    call_user_func_array( $match['target'], $match['params'] );
+if($match !== false){
+    if( is_array($match) && is_callable( $match['target'] ) ) {
+        call_user_func_array( $match['target'], $match['params'] );
+    } else {
+        header( $_SERVER["SERVER_PROTOCOL"] . ' 404 Not Found');
+    }
 } else {
-    header( $_SERVER["SERVER_PROTOCOL"] . ' 404 Not Found');
+    header("Status: 404 Not Found", false, 404);
+    header("Location: /articles");
 }
