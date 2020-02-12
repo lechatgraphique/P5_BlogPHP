@@ -19,12 +19,17 @@ class Comment
     /**
      * @var string
      */
+    private $user_id;
+
+    /**
+     * @var string
+     */
     private $author;
 
     /**
      * @var string
      */
-    private $create_at;
+    private $created_at;
 
     /**
      * @var bool
@@ -58,18 +63,36 @@ class Comment
     }
 
     /**
-     * @return string
+     * @return int
      */
-    public function getAuthor(): string
+    public function getUserId(): int
+    {
+        return $this->user_id;
+    }
+
+    /**
+     * @param int $user_id
+     * @return int
+     */
+    public function setUserId(int $user_id): int
+    {
+        $this->user_id = $user_id;
+        return $this;
+    }
+
+    /**
+     * @return
+     */
+    public function getAuthor()
     {
         return $this->author;
     }
 
     /**
-     * @param string $author
-     * @return string
+     * @param  $author
+     * @return
      */
-    public function setAuthor(string $author): string
+    public function setAuthor($author)
     {
         $this->author = $author;
         return $this;
@@ -78,18 +101,18 @@ class Comment
     /**
      * @return string
      */
-    public function getCreateAt(): string
+    public function getCreatedAt(): string
     {
-        return $this->create_at;
+        return $this->created_at;
     }
 
     /**
      * @param string $create_at
      * @return string
      */
-    public function setCreateAt(string $create_at): string
+    public function setCreatedAt(string $create_at): string
     {
-        $this->create_at = $create_at;
+        $this->created_at_at = $create_at;
         return $this;
     }
 

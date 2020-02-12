@@ -11,14 +11,30 @@ class Post
      */
     private $id;
 
-    // private $author; (implementation plus tard)
+    /**
+     * @var int
+     */
+    private $user_id;
+
+    /**
+     * @var object
+     */
+    private $author;
+
+    /**
+     * @var int
+     */
+    private $category_id;
 
     /**
      * @var string
      */
     private $category;
 
-    // private $comments; (implementation plus tard)
+    /**
+     * @var object
+     */
+    private $comments;
 
     /**
      * @var string
@@ -69,20 +85,102 @@ class Post
     }
 
     /**
-     * @return string
+     * @param int $id
+     * @return int
      */
-    public function getCategory(): string
+    public function setId(int $id): int
+    {
+        $this->id = $id;
+        return $this;
+    }
+
+    /**
+     * @return int
+     */
+    public function getUserId(): int
+    {
+        return $this->user_id;
+    }
+
+    /**
+     * @param int $user_id
+     * @return int
+     */
+    public function setUserId(int $user_id): int
+    {
+        $this->user_id = $user_id;
+        return $this;
+    }
+
+    /**
+     * @return
+     */
+    public function getAuthor(): object
+    {
+        return $this->author;
+    }
+
+    /**
+     * @param object $author
+     * @return object
+     */
+    public function setAuthor(object $author): object
+    {
+        $this->author = $author;
+        return $this;
+    }
+
+    /**
+     * @return int
+     */
+    public function getCategoryId(): int
+    {
+        return $this->category_id;
+    }
+
+    /**
+     * @param int $categoryId
+     * @return int
+     */
+    public function setCategoryId($categoryId): int
+    {
+        $this->category_id = $categoryId;
+        return $this;
+    }
+
+    /**
+     * @return
+     */
+    public function getCategory()
     {
         return $this->category;
     }
 
     /**
-     * @param string $category
-     * @return string
+     * @param  $category
+     * @return
      */
-    public function setCategory(string $category): string
+    public function setCategory($category)
     {
         $this->category = $category;
+        return $this;
+    }
+
+    /**
+     * @return object
+     */
+    public function getComments(): array
+    {
+        return $this->comments;
+    }
+
+    /**
+     * @param array $comments
+     * @return object
+     */
+    public function setComments(array $comments): object
+    {
+        $this->comments = $comments;
         return $this;
     }
 

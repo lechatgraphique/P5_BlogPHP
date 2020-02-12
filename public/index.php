@@ -40,7 +40,9 @@ $router->map( 'GET', '/articles/[*:slug]-[i:id]', function($slug, $id) use ($twi
     $postController = new \App\Controller\PostController();
     $post = $postController->post($id);
 
-    echo $twig->render('frontend/post/show.twig', ['post' => $post]);
+    $comments = $post->getComments();
+
+    echo $twig->render('frontend/post/show.twig', ['post' => $post, "comments" => $comments]);
 
 });
 
