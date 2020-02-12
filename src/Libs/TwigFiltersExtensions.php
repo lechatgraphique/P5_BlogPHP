@@ -14,9 +14,7 @@ class twigFiltersExtensions extends AbstractExtension
     {
         return [
             new TwigFilter('dateFR', [$this, 'formatedDateFr']),
-            new TwigFilter('truncate', [$this, 'truncateString']),
-            new TwigFilter('count', [$this, 'count']),
-
+            new TwigFilter('truncate', [$this, 'truncateString'])
         ];
     }
 
