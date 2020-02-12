@@ -14,7 +14,9 @@ class twigFiltersExtensions extends AbstractExtension
     {
         return [
             new TwigFilter('dateFR', [$this, 'formatedDateFr']),
-            new TwigFilter('truncate', [$this, 'truncateString'])
+            new TwigFilter('truncate', [$this, 'truncateString']),
+            new TwigFilter('count', [$this, 'count']),
+
         ];
     }
 
@@ -32,6 +34,12 @@ class twigFiltersExtensions extends AbstractExtension
         $value = substr($value, 0, $last_space)."...";
 
         return $value;
+    }
+
+    public function count(array $array): int
+    {
+       return count($array);
+
     }
 
 }
