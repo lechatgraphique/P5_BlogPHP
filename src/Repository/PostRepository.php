@@ -54,6 +54,8 @@ class PostRepository
         $categoryRepository = new CategoryRepository();
         $post->setCategory($categoryRepository->find($post->getCategoryId()));
 
+        $commentRepository = new CommentRepository();
+        $post->setComments($commentRepository->findByPostId($id));
 
         return $post;
     }

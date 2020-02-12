@@ -31,7 +31,10 @@ class Post
      */
     private $category;
 
-    // private $comments; (implementation plus tard)
+    /**
+     * @var object
+     */
+    private $comments;
 
     /**
      * @var string
@@ -112,16 +115,16 @@ class Post
     /**
      * @return
      */
-    public function getAuthor()
+    public function getAuthor(): object
     {
         return $this->author;
     }
 
     /**
-     * @param  $author
-     * @return
+     * @param object $author
+     * @return object
      */
-    public function setAuthor( $author)
+    public function setAuthor(object $author): object
     {
         $this->author = $author;
         return $this;
@@ -160,6 +163,24 @@ class Post
     public function setCategory($category)
     {
         $this->category = $category;
+        return $this;
+    }
+
+    /**
+     * @return object
+     */
+    public function getComments(): array
+    {
+        return $this->comments;
+    }
+
+    /**
+     * @param array $comments
+     * @return object
+     */
+    public function setComments(array $comments): object
+    {
+        $this->comments = $comments;
         return $this;
     }
 
