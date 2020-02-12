@@ -35,11 +35,4 @@ class twigFiltersExtensions extends AbstractExtension
 
         return $value;
     }
-
-    public function count(array $array): int
-    {
-       return count($array);
-
-    }
-
 }
