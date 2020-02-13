@@ -6,11 +6,10 @@ namespace App\Controller;
 
 use App\Render\Twig;
 
-class ConnexionController
+class ConnexionController extends Twig
 {
     public function index()
     {
-        $twig = Twig::run();
-        echo $twig->render('frontend/login/index.twig', []);
+        echo $this->twig->render('frontend/login/index.twig', []);
     }
 }

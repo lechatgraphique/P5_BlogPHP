@@ -6,11 +6,10 @@ namespace App\Controller;
 
 use App\Render\Twig;
 
-class InscriptionController
+class InscriptionController extends Twig
 {
     public function index()
     {
-        $twig = Twig::run();
-        echo $twig->render('frontend/inscription/index.twig', []);
+        echo $this->twig->render('frontend/inscription/index.twig', []);
     }
 }

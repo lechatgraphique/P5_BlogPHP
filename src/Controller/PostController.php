@@ -3,18 +3,19 @@
 
 namespace App\Controller;
 
+
 use App\Render\Twig;
 use App\Repository\PostRepository;
+use Twig\Environment;
 
-class PostController
+class PostController extends Twig
 {
     public function home()
     {
         $postRepository = new PostRepository();
         $posts = $postRepository->findAll();
 
-        $twig = Twig::run();
-        echo $twig->render('frontend/home/index.twig', [
+        echo $this->twig->render('frontend/home/index.twig', [
             'posts' => $posts
         ]);
     }
@@ -24,8 +25,8 @@ class PostController
         $postRepository = new PostRepository();
         $posts = $postRepository->findAll();
 
-        $twig = Twig::run();
-        echo $twig->render('frontend/post/index.twig', [
+        ;
+        echo $this->twig->render('frontend/post/index.twig', [
             'posts' => $posts
         ]);
     }
@@ -36,8 +37,7 @@ class PostController
         $post = $postRepository->find($params['id']);
         $comments = $post->getComments();
 
-        $twig = Twig::run();
-        echo $twig->render('frontend/post/show.twig', [
+        echo $this->twig->render('frontend/post/show.twig', [
             'post' => $post,
             'comments' => $comments
         ]);

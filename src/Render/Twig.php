@@ -6,16 +6,22 @@ namespace App\Render;
 
 class Twig
 {
-    public static function run()
+    protected $twig;
+    private $loader;
+
+    public function __construct()
     {
-        $loader = new \Twig\Loader\FilesystemLoader('../templates');
-        $twig = new \Twig\Environment($loader, [
+        $this->loader = new \Twig\Loader\FilesystemLoader('../templates');
+        $this->twig = new \Twig\Environment($this->loader, [
             'debug' => true,
         ]);
 
-        $twig->addExtension(new \Twig\Extension\DebugExtension());
-        $twig->addExtension(new \App\Libs\twigFiltersExtensions());
-
-        return $twig;
+        $this->twig->addExtension(new \Twig\Extension\DebugExtension());
+        $this->twig->addExtension(new \App\Libs\twigFiltersExtensions());
+    }
+    public function render(string $view, array $var = []): string
+    {
+        extract($var);
+        return $this->twig->render($view, $var);
     }
 }
