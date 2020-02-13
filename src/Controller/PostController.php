@@ -3,23 +3,43 @@
 
 namespace App\Controller;
 
-
-use App\Entity\Post;
+use App\Render\Twig;
 use App\Repository\PostRepository;
 
 class PostController
 {
-    public function listPosts(): array
+    public function home()
     {
         $postRepository = new PostRepository();
+        $posts = $postRepository->findAll();
 
-        return $posts = $postRepository->findAll();
+        $twig = Twig::run();
+        echo $twig->render('frontend/home/index.twig', [
+            'posts' => $posts
+        ]);
     }
 
-    public function post(int $id): Post
+    public function index()
     {
         $postRepository = new PostRepository();
+        $posts = $postRepository->findAll();
 
-        return $post = $postRepository->find($id);
+        $twig = Twig::run();
+        echo $twig->render('frontend/post/index.twig', [
+            'posts' => $posts
+        ]);
+    }
+
+    public function show($params)
+    {
+        $postRepository = new PostRepository();
+        $post = $postRepository->find($params['id']);
+        $comments = $post->getComments();
+
+        $twig = Twig::run();
+        echo $twig->render('frontend/post/show.twig', [
+            'post' => $post,
+            'comments' => $comments
+        ]);
     }
 }
