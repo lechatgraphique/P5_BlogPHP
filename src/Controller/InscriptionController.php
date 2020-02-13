@@ -6,10 +6,17 @@ namespace App\Controller;
 
 use App\Render\Twig;
 
-class InscriptionController extends Twig
+class InscriptionController
 {
+    public $twig;
+
+    public function __construct()
+    {
+        $this->twig = new Twig();
+    }
+
     public function index()
     {
-        echo $this->twig->render('frontend/inscription/index.twig', []);
+        echo $this->twig->getTwig()->render('frontend/inscription/index.twig', []);
     }
 }

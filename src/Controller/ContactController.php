@@ -6,10 +6,17 @@ namespace App\Controller;
 
 use App\Render\Twig;
 
-class ContactController extends  Twig
+class ContactController
 {
+    public $twig;
+
+    public function __construct()
+    {
+        $this->twig = new Twig();
+    }
+
     public function index()
     {
-        echo $this->twig->render('frontend/contact/index.twig', []);
+        echo $this->twig->getTwig()->render('frontend/contact/index.twig', []);
     }
 }

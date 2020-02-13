@@ -6,7 +6,7 @@ namespace App\Render;
 
 class Twig
 {
-    protected $twig;
+    private $twig;
     private $loader;
 
     public function __construct()
@@ -19,9 +19,8 @@ class Twig
         $this->twig->addExtension(new \Twig\Extension\DebugExtension());
         $this->twig->addExtension(new \App\Libs\twigFiltersExtensions());
     }
-    public function render(string $view, array $var = []): string
+    public function getTwig()
     {
-        extract($var);
-        return $this->twig->render($view, $var);
+        return $this->twig;
     }
 }
