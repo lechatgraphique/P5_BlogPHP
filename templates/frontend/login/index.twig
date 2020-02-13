@@ -1,0 +1,20 @@
+{% extends 'layouts/default.twig' %}
+
+{% block title %}
+    <title>Blog PHP : Connexion</title>
+{% endblock %}
+
+{% block content %}
+    {% include 'frontend/login/header.twig' %}
+    <div class="container mb-5">
+        <div class="row justify-content-center">
+            <div class="col col-lg-6">
+                <div class="card">
+                    <div class="card-body">
+                        {% include 'frontend/login/form.twig' %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
