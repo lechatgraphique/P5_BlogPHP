@@ -33,5 +33,4 @@ class twigFiltersExtensions extends AbstractExtension
 
         return $value;
     }
-
 }
