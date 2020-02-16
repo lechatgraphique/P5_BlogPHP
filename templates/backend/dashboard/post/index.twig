@@ -18,7 +18,7 @@
                    Liste des articles
                 </div>
                 <div class="card-body">
-                    <div class="d-flex justify-content-end mb-5">
+                    <div class="d-flex justify-content-end mb-3">
                         <a class="btn btn-primary" href="/dashboard/articles/form-create" role="button">Créer un article</a>
                     </div>
                     <table class="table">
@@ -26,6 +26,7 @@
                             <tr>
                                 <th scope="col">Titre</th>
                                 <th scope="col">Catégorie</th>
+                                <th scope="col">Auteur</th>
                                 <th scope="col">Date de création</th>
                                 <th scope="col"></th>
                             </tr>
@@ -39,6 +40,7 @@
                                 <td>
                                     <span class="badge badge-secondary">{{ post.category.title }}</span>
                                 </td>
+                                <td>{{ post.author.firstName }} {{ post.author.lastName | upper }}</td>
                                 <td>{{ post.createdAt | dateFR }}</td>
                                 <td>
                                     <a class="btn-link text-danger" href="/dashboard/articles/{{ post.slug }}-{{ post.id }}/delete" role="button"><i class="far fa-trash-alt"></i> Supprimer</a>

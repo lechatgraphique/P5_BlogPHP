@@ -77,8 +77,12 @@ class AdminPostController
             if($currentPost->getSlug() === $post->getSlug()){
                 SessionFlash::sessionFlash("danger", "Le slug existe déjà.");
                 header('Location: /dashboard/articles/form-create');
+                die();
             }
+
         }
+        SessionFlash::sessionFlash("success", "L'article ({$post->getTitle()}) a bien été enregistré.");
+
         $postRepository->create($post);
 
         header('Location: /dashboard/articles');
