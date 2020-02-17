@@ -32,7 +32,8 @@ if ($match) {
     $controller = $path[0];
     $method = $path[1];
     if($_POST) {
-        $match['params']['post'] = $_POST;
+        $arrayParams = array_merge($_POST, $_FILES);
+        $match['params']['post'] = $arrayParams;
     }
     $params = $match['params'];
 

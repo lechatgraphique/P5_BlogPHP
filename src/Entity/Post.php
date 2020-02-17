@@ -266,7 +266,7 @@ class Post
 
     /**
      * @param string $image
-     * @return string
+     * @return object
      */
     public function setImage(string $image): object
     {
@@ -295,7 +295,7 @@ class Post
     /**
      * @return string
      */
-    public function getUpdatedAt(): string
+    public function getUpdatedAt(): ?string
     {
         return $this->updated_at;
     }

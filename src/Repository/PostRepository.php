@@ -65,8 +65,8 @@ class PostRepository
 
     public function create(Post $post)
     {
-        $req = $this->db->prepare('INSERT INTO post(user_id, category_id, slug, title, description, content, created_at, is_validated) 
-VALUES(:userId, :categoryId, :slug, :title, :description, :content, NOW(), :isValidated)');
+        $req = $this->db->prepare('INSERT INTO post(user_id, category_id, slug, title, description, content, created_at, is_validated, image) 
+VALUES(:userId, :categoryId, :slug, :title, :description, :content, NOW(), :isValidated, :image)');
         $req->bindValue(':title', $post->getTitle());
         $req->bindValue(':userId', $post->getUserId());
         $req->bindValue(':slug', $post->getSlug());
@@ -74,6 +74,7 @@ VALUES(:userId, :categoryId, :slug, :title, :description, :content, NOW(), :isVa
         $req->bindValue(':content', $post->getContent());
         $req->bindValue(':categoryId', $post->getCategoryId());
         $req->bindValue(':isValidated', $post->getIsIsValidated());
+        $req->bindValue(':image', $post->getImage());
 
         $req->execute();
     }
@@ -86,6 +87,7 @@ VALUES(:userId, :categoryId, :slug, :title, :description, :content, NOW(), :isVa
                                description = :description,
                                content = :content,
                                category_id = :categoryId,
+                               image = :image,
                                updated_at = :updatedAt
                            WHERE id = :id');
         $req->bindValue(':id', $post->getId());
@@ -94,8 +96,8 @@ VALUES(:userId, :categoryId, :slug, :title, :description, :content, NOW(), :isVa
         $req->bindValue(':description', $post->getDescription());
         $req->bindValue(':content', $post->getContent());
         $req->bindValue(':categoryId', $post->getCategoryId());
+        $req->bindValue(':image', $post->getImage());
         $req->bindValue(':updatedAt', $post->getUpdatedAt());
-        // $req->bindValue(':imagePost', $post->getImagePost());
 
         $req->execute();
     }

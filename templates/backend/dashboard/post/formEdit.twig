@@ -22,6 +22,7 @@
                             <section class=" mt-5">
                                 <div class="row">
                                     <div class="col-md-5 col-sm-12">
+                                            <img src="/uploads/posts/{{ post.image }}" alt="..." class="img-thumbnail img-crop-thumb">
                                         <div class="form-group mt-3">
                                             <label>Image</label>
                                             <div class="custom-file">
@@ -45,7 +46,7 @@
                                             <br><br>
                                             Posté le : <b>{{ post.createdAt | dateFR }}</b>
                                             <br>
-                                            Mise à jour le : <b>{{ post.updatedAt | dateFR }}</b>
+                                            Mise à jour le : <b>{% if post.updatedAt %} {{ post.updatedAt | dateFR }} {% endif %}</b>
                                         </p>
                                     </div>
                                     <div class="col-md-7 col-sm-12">

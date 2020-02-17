@@ -5,6 +5,7 @@ namespace App\Controller;
 
 use App\Entity\Post;
 use App\Libs\SessionFlash;
+use App\Libs\UploadImage;
 use App\Render\Twig;
 use App\Repository\CategoryRepository;
 use App\Repository\PostRepository;
@@ -59,7 +60,17 @@ class AdminPostController
 
     public function create(array $params)
     {
-        $id = (int)$params['id'];
+        $uploadImage = new UploadImage(
+            $params['post']['image_post']['name'],
+            $params['post']['image_post']['size'],
+            $params['post']['image_post']['tmp_name'],
+            $params['post']['image_post']['type']
+        );
+
+        if($uploadImage->getErrors()) {
+           SessionFlash::sessionFlash("danger", $uploadImage->getErrors());
+           header("Location: /dashboard/articles/form-create");
+        }
 
         $post = new Post();
         $post->setTitle($params['post']['title'])
@@ -68,7 +79,8 @@ class AdminPostController
             ->setIsValidated(true)
             ->setDescription($params['post']['description'])
             ->setContent($params['post']['content'])
-            ->setCategoryId($params['post']['category_id']);
+            ->setCategoryId($params['post']['category_id'])
+            ->setImage($params['post']['image_post']['name']);
 
         $postRepository = new PostRepository();
         $posts = $postRepository->findAll();
@@ -90,6 +102,7 @@ class AdminPostController
 
     public function update(array $params)
     {
+
         $postEntity = new Post();
         $post = $postEntity->setId($params['post']['id'])
             ->setTitle($params['post']['title'])
@@ -99,7 +112,17 @@ class AdminPostController
             ->setCategoryId($params['post']['category_id'])
             ->setUpdatedAt(date("Y-m-d H:i:s"));
 
-            // Add userId, setImage (plus tard)
+        $postRepository = new PostRepository();
+        $posts = $postRepository->findAll();
+
+        foreach ($posts as $currentPost){
+            if($currentPost->getSlug() === $post->getSlug()){
+                SessionFlash::sessionFlash("danger", "Le slug existe déjà.");
+                header('Location: /dashboard/articles/form-create');
+                die();
+            }
+
+        }
 
         $title = $post->getTitle();
 

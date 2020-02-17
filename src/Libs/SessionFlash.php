@@ -29,8 +29,4 @@ class SessionFlash
         ];
     }
 
-    public static function sessionPost($post)
-    {
-        $_SESSION['post'] = $post;
-    }
 }
