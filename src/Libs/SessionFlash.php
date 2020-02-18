@@ -28,5 +28,4 @@ class SessionFlash
             "content" => $content
         ];
     }
-
 }

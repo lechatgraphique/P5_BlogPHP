@@ -31,7 +31,12 @@ if ($match) {
     $path = explode('#', $match['target']);
     $controller = $path[0];
     $method = $path[1];
+    if($_GET) {
+        $arrayParams = $_GET;
+        $match['params']['get'] = $arrayParams;
+    }
     if($_POST) {
+
         $arrayParams = array_merge($_POST, $_FILES);
         $match['params']['post'] = $arrayParams;
     }

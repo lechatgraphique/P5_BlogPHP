@@ -38,7 +38,7 @@ class UploadImage
             $this->errors = "Ce fichier fait plus de 2 Mo. Désolé, il doit être inférieur ou égal à 2 Mo";
         }
 
-        if (empty($errors)) {
+        if (empty($this->errors)) {
             $didUpload = move_uploaded_file($fileTmpName, $uploadPath);
 
             if ($didUpload) {

@@ -4,6 +4,7 @@
 namespace App\Controller;
 
 use App\Entity\Post;
+use App\Libs\Pagination;
 use App\Libs\SessionFlash;
 use App\Libs\UploadImage;
 use App\Render\Twig;
@@ -19,16 +20,38 @@ class AdminPostController
         $this->twig = new Twig();
     }
 
-    public function index()
+    public function index(array $params)
     {
+        $page = $params['get']['page'];
+
         $postRepository = new PostRepository();
         $posts = $postRepository->findAll();
+
+        $countPosts = count($postRepository->findAll());
+        $pagination = null;
+
+        if($page === null){
+            $page = 1;
+        }
+
+        if($countPosts > 5) {
+            $PaginationFinal = new Pagination();
+            $PaginationFinal->setCurrentPage($page);
+            $PaginationFinal->setInnerLinks(2);
+            $PaginationFinal->setNbElementsInPage(5);
+            $PaginationFinal->setNbMaxElements($countPosts);
+            $PaginationFinal->setUrl("/dashboard/articles?page={i}");
+
+            $pagination = $PaginationFinal->renderBootstrapPagination();
+            $posts = $PaginationFinal->setContent($posts);
+        }
 
         $flash = SessionFlash::renderSessionFlash();
 
         echo $this->twig->getTwig()->render('backend/dashboard/post/index.twig', [
             "posts" => $posts,
-            "flash" => $flash
+            "flash" => $flash,
+            "pagination" => $pagination
         ]);
     }
 
@@ -49,27 +72,34 @@ class AdminPostController
     {
         $postRepository = new PostRepository();
         $post = $postRepository->find($params['id']);
+
         $categoryRepository = new CategoryRepository();
         $categories = $categoryRepository->findAll();
 
+        $flash = SessionFlash::renderSessionFlash();
+
         echo $this->twig->getTwig()->render('backend/dashboard/post/formEdit.twig', [
             "post" => $post,
-            "categories" => $categories
+            "categories" => $categories,
+            "flash" => $flash
         ]);
     }
 
     public function create(array $params)
     {
+        $params['post_img'] = $params['post']['image_post'];
+
         $uploadImage = new UploadImage(
-            $params['post']['image_post']['name'],
-            $params['post']['image_post']['size'],
-            $params['post']['image_post']['tmp_name'],
-            $params['post']['image_post']['type']
+            $params['post_img']['name'],
+            $params['post_img']['size'],
+            $params['post_img']['tmp_name'],
+            $params['post_img']['type']
         );
 
         if($uploadImage->getErrors()) {
-           SessionFlash::sessionFlash("danger", $uploadImage->getErrors());
+            SessionFlash::sessionFlash("danger", $uploadImage->getErrors());
            header("Location: /dashboard/articles/form-create");
+           return;
         }
 
         $post = new Post();
@@ -80,28 +110,23 @@ class AdminPostController
             ->setDescription($params['post']['description'])
             ->setContent($params['post']['content'])
             ->setCategoryId($params['post']['category_id'])
-            ->setImage($params['post']['image_post']['name']);
+            ->setImage($params['post_img']['name']);
+
+        $title = $post->getTitle();
 
         $postRepository = new PostRepository();
-        $posts = $postRepository->findAll();
-
-        foreach ($posts as $currentPost){
-            if($currentPost->getSlug() === $post->getSlug()){
-                SessionFlash::sessionFlash("danger", "Le slug existe déjà.");
-                header('Location: /dashboard/articles/form-create');
-                die();
-            }
-
-        }
-        SessionFlash::sessionFlash("success", "L'article ({$post->getTitle()}) a bien été enregistré.");
-
         $postRepository->create($post);
+
+        SessionFlash::sessionFlash("success", "L'article ($title) a bien été enregistré.");
 
         header('Location: /dashboard/articles');
     }
 
     public function update(array $params)
     {
+        $params['post_img'] = $params['post']['image_post'];
+
+        $postRepository = new PostRepository();
 
         $postEntity = new Post();
         $post = $postEntity->setId($params['post']['id'])
@@ -110,18 +135,30 @@ class AdminPostController
             ->setDescription($params['post']['description'])
             ->setContent($params['post']['content'])
             ->setCategoryId($params['post']['category_id'])
+            ->setImage($params['post_img']['name'])
             ->setUpdatedAt(date("Y-m-d H:i:s"));
 
-        $postRepository = new PostRepository();
-        $posts = $postRepository->findAll();
 
-        foreach ($posts as $currentPost){
-            if($currentPost->getSlug() === $post->getSlug()){
-                SessionFlash::sessionFlash("danger", "Le slug existe déjà.");
-                header('Location: /dashboard/articles/form-create');
-                die();
+        $currentPost = $postRepository->find($params['post']['id']);
+
+        if(empty($post->getImage())) {
+            $post->setImage($currentPost->getImage());
+        }
+
+        if($post->getImage() != $currentPost->getImage()) {
+            $uploadImage = new UploadImage(
+                $params['post_img']['name'],
+                $params['post_img']['size'],
+                $params['post_img']['tmp_name'],
+                $params['post_img']['type']
+            );
+
+
+            if($uploadImage->getErrors()) {
+                SessionFlash::sessionFlash("danger", $uploadImage->getErrors());
+                header("Location: /dashboard/articles/form-edit/{$post->getSlug()}-{$post->getId()}");
+                return;
             }
-
         }
 
         $title = $post->getTitle();
@@ -142,6 +179,10 @@ class AdminPostController
 
         if($post->getId() === $id){
             $postRepository->delete($post);
+
+            if($post->getImage()){
+                unlink('uploads/posts/'.$post->getImage());
+            }
         } else {
             SessionFlash::sessionFlash("danger", "L'article n'existe pas, suppression impossible.");
             header('Location: /dashboard/articles');
