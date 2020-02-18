@@ -5,6 +5,7 @@ namespace App\Controller;
 
 
 use App\Entity\Category;
+use App\Libs\Pagination;
 use App\Libs\SessionFlash;
 use App\Render\Twig;
 use App\Repository\CategoryRepository;
@@ -21,14 +22,36 @@ class AdminCategoryController
 
     public function index(array $params)
     {
+        $page = $params['get']['page'];
+
         $categoryRepository = new CategoryRepository();
         $categories = $categoryRepository->findAll();
+
+        $countCategories = count($categoryRepository->findAll());
+        $pagination = null;
+
+        if($page === null){
+            $page = 1;
+        }
+
+        if($countCategories > 5) {
+            $PaginationFinal = new Pagination();
+            $PaginationFinal->setCurrentPage($page);
+            $PaginationFinal->setInnerLinks(2);
+            $PaginationFinal->setNbElementsInPage(5);
+            $PaginationFinal->setNbMaxElements($countCategories);
+            $PaginationFinal->setUrl("/dashboard/categories?page={i}");
+
+            $pagination = $PaginationFinal->renderBootstrapPagination();
+            $categories = $PaginationFinal->setContent($categories);
+        }
 
         $flash = SessionFlash::renderSessionFlash();
 
         echo $this->twig->getTwig()->render('backend/dashboard/category/index.twig', [
             "categories" => $categories,
-            "flash" => $flash
+            "flash" => $flash,
+            "pagination" => $pagination
         ]);
     }
 
