@@ -4,6 +4,7 @@
 namespace App\Controller;
 
 
+use App\Entity\Category;
 use App\Libs\SessionFlash;
 use App\Render\Twig;
 use App\Repository\CategoryRepository;
@@ -23,9 +24,41 @@ class AdminCategoryController
         $categoryRepository = new CategoryRepository();
         $categories = $categoryRepository->findAll();
 
+        $flash = SessionFlash::renderSessionFlash();
+
         echo $this->twig->getTwig()->render('backend/dashboard/category/index.twig', [
-            "categories" => $categories
+            "categories" => $categories,
+            "flash" => $flash
         ]);
+    }
+
+    public function formEdit(array $params)
+    {
+        $categoryRepository = new CategoryRepository();
+        $category = $categoryRepository->find($params['id']);
+
+        $flash = SessionFlash::renderSessionFlash();
+
+        echo $this->twig->getTwig()->render('backend/dashboard/category/formEdit.twig', [
+            "category" => $category,
+            "flash" => $flash
+        ]);
+    }
+    public function update(array $params)
+    {
+        $categoryRepository = new CategoryRepository();
+
+        $categoryEntity = new Category();
+        $category = $categoryEntity->setId($params['post']['id'])
+            ->setTitle($params['post']['title'])
+            ->setSlug($params['post']['slug']);
+
+        $title = $category->getTitle();
+
+        $categoryRepository->update($category);
+
+        SessionFlash::sessionFlash("success", "La mise à jour de la catégorie ($title) a réussie.");
+        header('Location: /dashboard/categories');
     }
 
     public function delete(array $params)

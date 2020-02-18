@@ -163,7 +163,6 @@ class AdminPostController
 
         $title = $post->getTitle();
 
-        $postRepository = $postRepository = new PostRepository();
         $postRepository->update($post);
 
         SessionFlash::sessionFlash("success", "La mise à jour de l'article ($title) a réussie.");

@@ -19,7 +19,7 @@
                     </div>
                     <div class="card-body">
                         <div class="d-flex justify-content-end mb-3">
-                            <a class="btn btn-primary" href="/dashboard/articles/form-create" role="button">Créer une catégorie</a>
+                            <a class="btn btn-primary" href="/dashboard/categories/form-create" role="button">Créer une catégorie</a>
                         </div>
                         <table class="table">
                             <thead class="thead-light">
@@ -32,7 +32,7 @@
                             {% for category in categories %}
                                 <tr>
                                     <th scope="row">
-                                        <a class="btn-link" href="#" role="button">{{ category.title }}</a>
+                                        <a class="btn-link" href="/dashboard/categories/{{ category.slug }}-{{ category.id }}" role="button">{{ category.title }}</a>
                                     </th>
                                     <td>
                                         <a class="btn-link text-danger" href="/dashboard/categories/{{ category.slug }}-{{ category.id }}/delete" role="button"><i class="far fa-trash-alt"></i></a>

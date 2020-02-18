@@ -25,6 +25,8 @@ $router->map('GET','/dashboard/articles/[*:slug]-[i:id]/delete', 'App\Controller
 $router->map('GET','/dashboard/articles/form-create', 'App\Controller\AdminPostController#formCreate');
 $router->map('POST','/dashboard/articles/create/', 'App\Controller\AdminPostController#create');
 $router->map('GET', '/dashboard/categories', 'App\Controller\AdminCategoryController#index');
+$router->map('GET', '/dashboard/categories/[*:slug]-[i:id]', 'App\Controller\AdminCategoryController#formEdit');
+$router->map('POST','/dashboard/categories/update/', 'App\Controller\AdminCategoryController#update');
 $router->map('GET','/dashboard/categories/[*:slug]-[i:id]/delete', 'App\Controller\AdminCategoryController#delete');
 
 $match = $router->match();

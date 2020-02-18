@@ -38,6 +38,19 @@ class CategoryRepository
         return $req->fetch();
     }
 
+    public function update(Category $category)
+    {
+        $req = $this->db->prepare('UPDATE category 
+                           SET title = :title,  
+                               slug = :slug
+                           WHERE id = :id');
+        $req->bindValue(':id', $category->getId());
+        $req->bindValue(':title', $category->getTitle());
+        $req->bindValue(':slug', $category->getSlug());
+
+        $req->execute();
+    }
+
     public function delete(Category $category)
     {
         $req = $this->db->prepare('DELETE FROM category WHERE id = :id');

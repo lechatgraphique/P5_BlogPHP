@@ -49,9 +49,9 @@ class Category
 
     /**
      * @param string $title
-     * @return string
+     * @return object
      */
-    public function setTitle(string $title): string
+    public function setTitle(string $title): object
     {
         $this->title = $title;
         return $this;
@@ -67,9 +67,9 @@ class Category
 
     /**
      * @param string $slug
-     * @return string
+     * @return object
      */
-    public function setSlug(string $slug): string
+    public function setSlug(string $slug): object
     {
         $this->slug = $slug;
         return $this;
