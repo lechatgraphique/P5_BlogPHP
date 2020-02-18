@@ -5,6 +5,7 @@ namespace App\Repository;
 
 
 use App\Connector\DBConnexion;
+use App\Entity\Category;
 use PDO;
 
 class CategoryRepository
@@ -36,4 +37,12 @@ class CategoryRepository
 
         return $req->fetch();
     }
+
+    public function delete(Category $category)
+    {
+        $req = $this->db->prepare('DELETE FROM category WHERE id = :id');
+        $req->bindValue(':id', $category->getId());
+        $req->execute();
+    }
+
 }
