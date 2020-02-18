@@ -38,6 +38,15 @@ class CategoryRepository
         return $req->fetch();
     }
 
+    public function create(Category $category)
+    {
+        $req = $this->db->prepare('INSERT INTO category(title, slug) VALUES(:title, :slug)');
+        $req->bindValue(':title', $category->getTitle());
+        $req->bindValue(':slug', $category->getSlug());
+
+        $req->execute();
+    }
+
     public function update(Category $category)
     {
         $req = $this->db->prepare('UPDATE category 

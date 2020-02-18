@@ -32,6 +32,19 @@ class AdminCategoryController
         ]);
     }
 
+    public function formCreate()
+    {
+        $categoryRepository = new CategoryRepository();
+        $categories = $categoryRepository->findAll();
+
+        $flash = SessionFlash::renderSessionFlash();
+
+        echo $this->twig->getTwig()->render('backend/dashboard/category/formCreate.twig', [
+            "categories" => $categories,
+            "flash" => $flash
+        ]);
+    }
+
     public function formEdit(array $params)
     {
         $categoryRepository = new CategoryRepository();
@@ -44,6 +57,33 @@ class AdminCategoryController
             "flash" => $flash
         ]);
     }
+
+    public function create(array $params)
+    {
+        $category = new Category();
+        $category->setTitle($params['post']['title'])
+            ->setSlug($params['post']['slug']);
+
+        $title = $category->getTitle();
+
+        $categoryRepository = new CategoryRepository();
+        $categories = $categoryRepository->findAll();
+
+        foreach ($categories as $currentCategory) {
+            if($category->getTitle() === $currentCategory->getTitle()) {
+                SessionFlash::sessionFlash("danger", "La catégorie {$category->getTitle()} existe déjà.");
+                header("Location: /dashboard/categories/form-create");
+                return;
+            }
+        }
+
+        $categoryRepository->create($category);
+
+        SessionFlash::sessionFlash("success", "La catégorie ($title) a bien été enregistré.");
+
+        header('Location: /dashboard/categories');
+    }
+
     public function update(array $params)
     {
         $categoryRepository = new CategoryRepository();

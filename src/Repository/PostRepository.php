@@ -66,7 +66,7 @@ class PostRepository
     public function create(Post $post)
     {
         $req = $this->db->prepare('INSERT INTO post(user_id, category_id, slug, title, description, content, created_at, is_validated, image) 
-VALUES(:userId, :categoryId, :slug, :title, :description, :content, NOW(), :isValidated, :image)');
+                            VALUES(:userId, :categoryId, :slug, :title, :description, :content, NOW(), :isValidated, :image)');
         $req->bindValue(':title', $post->getTitle());
         $req->bindValue(':userId', $post->getUserId());
         $req->bindValue(':slug', $post->getSlug());

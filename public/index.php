@@ -28,6 +28,8 @@ $router->map('GET', '/dashboard/categories', 'App\Controller\AdminCategoryContro
 $router->map('GET', '/dashboard/categories/[*:slug]-[i:id]', 'App\Controller\AdminCategoryController#formEdit');
 $router->map('POST','/dashboard/categories/update/', 'App\Controller\AdminCategoryController#update');
 $router->map('GET','/dashboard/categories/[*:slug]-[i:id]/delete', 'App\Controller\AdminCategoryController#delete');
+$router->map('GET','/dashboard/categories/form-create', 'App\Controller\AdminCategoryController#formCreate');
+$router->map('POST','/dashboard/categories/create/', 'App\Controller\AdminCategoryController#create');
 
 $match = $router->match();
 
