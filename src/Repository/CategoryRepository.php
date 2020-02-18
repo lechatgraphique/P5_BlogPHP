@@ -18,7 +18,7 @@ class CategoryRepository
 
     public function findAll()
     {
-        $req = $this->db->query('SELECT * FROM category ORDER BY created_at DESC LIMIT 0, 5');
+        $req = $this->db->query('SELECT * FROM category');
 
         $req->execute();
         $req->setFetchMode(PDO::FETCH_CLASS,'App\Entity\Category');

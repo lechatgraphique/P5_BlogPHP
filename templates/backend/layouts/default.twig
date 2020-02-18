@@ -9,7 +9,18 @@
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
         <!-- Font Awesome 5 CSS -->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css">
-
+        <style>
+            .img-crop {
+                width: 100%;
+                height: 500px;
+                object-fit: cover;
+            }
+            .img-crop-thumb {
+                width: 100%;
+                height: 200px;
+                object-fit: cover;
+            }
+        </style>
         {% block title %} {% endblock %}
     </head>
     <body>
@@ -17,8 +28,6 @@
     {% include 'backend/layouts/navbar.twig' %}
 
     {% block content %} {% endblock %}
-
-    {% include 'backend/layouts/footer.twig' %}
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->

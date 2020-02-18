@@ -1,0 +1,5 @@
+{% if flash != null %}
+    <div class="alert {% if flash['type'] == 'danger' %} alert-danger {% elseif flash['type'] == 'success' %} alert-success {% elseif flash['type'] == 'warning' %} alert-warning {% else %} alert-info {% endif %} role="alert">
+    {{ flash['content'] }}
+    </div>
+{% endif %}

@@ -86,9 +86,9 @@ class Post
 
     /**
      * @param int $id
-     * @return int
+     * @return object
      */
-    public function setId(int $id): int
+    public function setId(int $id): object
     {
         $this->id = $id;
         return $this;
@@ -106,7 +106,7 @@ class Post
      * @param int $user_id
      * @return int
      */
-    public function setUserId(int $user_id): int
+    public function setUserId(int $user_id): object
     {
         $this->user_id = $user_id;
         return $this;
@@ -142,7 +142,7 @@ class Post
      * @param int $categoryId
      * @return int
      */
-    public function setCategoryId($categoryId): int
+    public function setCategoryId($categoryId): object
     {
         $this->category_id = $categoryId;
         return $this;
@@ -160,7 +160,7 @@ class Post
      * @param  $category
      * @return
      */
-    public function setCategory($category)
+    public function setCategory($category): object
     {
         $this->category = $category;
         return $this;
@@ -196,7 +196,7 @@ class Post
      * @param string $slug
      * @return string
      */
-    public function setSlug(string $slug): string
+    public function setSlug(string $slug)
     {
         $this->slug = $slug;
         return $this;
@@ -214,7 +214,7 @@ class Post
      * @param string $title
      * @return string
      */
-    public function setTitle(string $title): string
+    public function setTitle(string $title): object
     {
         $this->title = $title;
         return $this;
@@ -232,7 +232,7 @@ class Post
      * @param string $description
      * @return string
      */
-    public function setDescription(string $description): string
+    public function setDescription(string $description): object
     {
         $this->description = $description;
         return $this;
@@ -250,7 +250,7 @@ class Post
      * @param string $content
      * @return string
      */
-    public function setContent(string $content): string
+    public function setContent(string $content): object
     {
         $this->content = $content;
         return $this;
@@ -266,9 +266,9 @@ class Post
 
     /**
      * @param string $image
-     * @return string
+     * @return object
      */
-    public function setImage(string $image): string
+    public function setImage(string $image): object
     {
         $this->image = $image;
         return $this;
@@ -286,7 +286,7 @@ class Post
      * @param string $created_at
      * @return string
      */
-    public function setCreatedAt(string $created_at): string
+    public function setCreatedAt(string $created_at): object
     {
         $this->created_at = $created_at;
         return $this;
@@ -295,7 +295,7 @@ class Post
     /**
      * @return string
      */
-    public function getUpdatedAt(): string
+    public function getUpdatedAt(): ?string
     {
         return $this->updated_at;
     }
@@ -304,7 +304,7 @@ class Post
      * @param string $updated_at
      * @return string
      */
-    public function setUpdatedAt(string $updated_at): string
+    public function setUpdatedAt(string $updated_at): object
     {
         $this->updated_at = $updated_at;
         return $this;
@@ -313,7 +313,7 @@ class Post
     /**
      * @return bool
      */
-    public function isIsValidated(): bool
+    public function getIsIsValidated(): bool
     {
         return $this->is_validated;
     }
@@ -322,7 +322,7 @@ class Post
      * @param bool $is_validated
      * @return bool
      */
-    public function setIsValidated(bool $is_validated): bool
+    public function setIsValidated(bool $is_validated): object
     {
         $this->is_validated = $is_validated;
         return $this;
