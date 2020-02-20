@@ -37,7 +37,7 @@ class User
     private $last_name;
 
     /**
-     * @var bool
+     * @var int
      */
     private $disabled;
 
@@ -60,6 +60,16 @@ class User
     }
 
     /**
+     * @param int $id
+     * @return object
+     */
+    public function setId(int $id): object
+    {
+        $this->id = $id;
+        return $this;
+    }
+
+    /**
      * @return string
      */
     public function getUsername(): string
@@ -69,9 +79,9 @@ class User
 
     /**
      * @param string $username
-     * @return string
+     * @return object
      */
-    public function setUsername(string $username): string
+    public function setUsername(string $username): object
     {
         $this->username = $username;
         return $this;
@@ -87,9 +97,9 @@ class User
 
     /**
      * @param string $password
-     * @return string
+     * @return object
      */
-    public function setPassword(string $password): string
+    public function setPassword(string $password): object
     {
         $this->password = $password;
         return $this;
@@ -105,9 +115,9 @@ class User
 
     /**
      * @param string $avatar
-     * @return string
+     * @return object
      */
-    public function setAvatar(string $avatar): string
+    public function setAvatar(string $avatar): object
     {
         $this->avatar = $avatar;
         return $this;
@@ -123,9 +133,9 @@ class User
 
     /**
      * @param string $first_name
-     * @return string
+     * @return object
      */
-    public function setFirstName(string $first_name): string
+    public function setFirstName(string $first_name): object
     {
         $this->first_name = $first_name;
         return $this;
@@ -141,28 +151,34 @@ class User
 
     /**
      * @param string $last_name
-     * @return string
+     * @return object
      */
-    public function setLastName(string $last_name): string
+    public function setLastName(string $last_name): object
     {
         $this->last_name = $last_name;
         return $this;
     }
 
     /**
-     * @return bool
+     * @return int
      */
-    public function isDisabled(): bool
+    public function getDisabled()
     {
         return $this->disabled;
     }
 
     /**
-     * @param bool $disabled
-     * @return string
+     * @param string $disabled
+     * @return object
      */
-    public function setDisabled(bool $disabled): string
+    public function setDisabled(?string $disabled): object
     {
+        if($disabled == 'on') {
+            $disabled = 1;
+        } elseif (!isset($disabled)) {
+            $disabled = 0;
+        }
+
         $this->disabled = $disabled;
         return $this;
     }
@@ -177,10 +193,16 @@ class User
 
     /**
      * @param string $role
-     * @return string
+     * @return object
      */
-    public function setRole($role): string
+    public function setRole(?string $role): object
     {
+        if($role === 'on') {
+            $role = 'ADMINISTRATOR';
+        } elseif (!isset($role)) {
+            $role = 'USER';
+        }
+
         $this->role = $role;
         return $this;
     }
@@ -195,9 +217,9 @@ class User
 
     /**
      * @param string $created_at
-     * @return string
+     * @return object
      */
-    public function setCreatedAt(string $created_at): string
+    public function setCreatedAt(string $created_at): object
     {
         $this->created_at = $created_at;
         return $this;

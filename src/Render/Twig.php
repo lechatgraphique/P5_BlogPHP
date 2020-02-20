@@ -3,7 +3,6 @@
 
 namespace App\Render;
 
-
 class Twig
 {
     private $twig;
@@ -15,6 +14,7 @@ class Twig
         $this->twig = new \Twig\Environment($this->loader, [
             'debug' => true,
         ]);
+        $this->twig->addGlobal('session', unserialize($_SESSION['user']));
 
         $this->twig->addExtension(new \Twig\Extension\DebugExtension());
         $this->twig->addExtension(new \App\Libs\twigFiltersExtensions());
