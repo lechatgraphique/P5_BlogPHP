@@ -1,5 +1,6 @@
 <?php
 session_start();
+
 require "../vendor/autoload.php";
 
 $whoops = new \Whoops\Run;
@@ -17,19 +18,28 @@ $router->map('GET', '/contact', 'App\Controller\ContactController#index');
 $router->map('GET', '/inscription', 'App\Controller\InscriptionController#index');
 $router->map('GET', '/connexion', 'App\Controller\ConnexionController#index');
 
-$router->map('GET', '/dashboard', 'App\Controller\AdminController#index');
+$router->map('GET', '/dashboard', 'App\Controller\AdminPostController#index');
+
 $router->map('GET', '/dashboard/articles', 'App\Controller\AdminPostController#index');
 $router->map('GET', '/dashboard/articles/[*:slug]-[i:id]', 'App\Controller\AdminPostController#formEdit');
 $router->map('POST','/dashboard/articles/update/', 'App\Controller\AdminPostController#update');
 $router->map('GET','/dashboard/articles/[*:slug]-[i:id]/delete', 'App\Controller\AdminPostController#delete');
 $router->map('GET','/dashboard/articles/form-create', 'App\Controller\AdminPostController#formCreate');
 $router->map('POST','/dashboard/articles/create/', 'App\Controller\AdminPostController#create');
+
 $router->map('GET', '/dashboard/categories', 'App\Controller\AdminCategoryController#index');
 $router->map('GET', '/dashboard/categories/[*:slug]-[i:id]', 'App\Controller\AdminCategoryController#formEdit');
 $router->map('POST','/dashboard/categories/update/', 'App\Controller\AdminCategoryController#update');
 $router->map('GET','/dashboard/categories/[*:slug]-[i:id]/delete', 'App\Controller\AdminCategoryController#delete');
 $router->map('GET','/dashboard/categories/form-create', 'App\Controller\AdminCategoryController#formCreate');
 $router->map('POST','/dashboard/categories/create/', 'App\Controller\AdminCategoryController#create');
+
+$router->map('GET', '/dashboard/utilisateurs', 'App\Controller\AdminUserController#index');
+$router->map('GET', '/dashboard/utilisateurs/[i:id]', 'App\Controller\AdminUserController#formEdit');
+$router->map('POST','/dashboard/utilisateurs/update/', 'App\Controller\AdminUserController#update');
+$router->map('GET','/dashboard/utilisateurs/[i:id]/delete', 'App\Controller\AdminUserController#delete');
+$router->map('GET','/dashboard/utilisateurs/form-create', 'App\Controller\AdminUserController#formCreate');
+$router->map('POST','/dashboard/utilisateurs/create/', 'App\Controller\AdminUserController#create');
 
 $match = $router->match();
 

@@ -153,7 +153,6 @@ class AdminPostController
                 $params['post_img']['type']
             );
 
-
             if($uploadImage->getErrors()) {
                 SessionFlash::sessionFlash("danger", $uploadImage->getErrors());
                 header("Location: /dashboard/articles/form-edit/{$post->getSlug()}-{$post->getId()}");

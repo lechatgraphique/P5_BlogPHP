@@ -1,0 +1,66 @@
+{% extends 'backend/layouts/default.twig' %}
+
+{% block title %}
+    <title>Blog PHP : Liste des utilisateurs</title>
+{% endblock %}
+
+{% block content %}
+
+    <div class="container-fluid mt-5 pt-5">
+        <div class="row">
+            <div class="col-md-12 col-lg-3">
+                {% include 'backend/layouts/adminNavbar.twig' %}
+            </div>
+            <div class="col-md-12 col-lg-9">
+                {% include 'backend/layouts/alert.twig' %}
+                <div class="card">
+                    <div class="card-header">
+                        Liste des utilisateurs
+                    </div>
+                    <div class="card-body">
+                        <div class="d-flex justify-content-end mb-3">
+                            <a class="btn btn-primary" href="/dashboard/utilisateurs/form-create" role="button">Créer un utilisateur</a>
+                        </div>
+                        <table class="table">
+                            <thead class="thead-light">
+                            <tr>
+                                <th scope="col">Actif</th>
+                                <th scope="col">Rôle</th>
+                                <th scope="col">Utilisateur</th>
+                                <th scope="col">Prénom & Nom</th>
+                                <th scope="col">Action</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for user in users %}
+                                <tr>
+                                    <td>
+                                    {% if user.disabled == 1 %}
+                                        <span class="badge badge-success">OUI</span>
+                                    {% else %}
+                                        <span class="badge badge-warning">NON</span>
+                                    </td>
+                                    {% endif %}
+                                   <td>
+                                       <span class="badge badge-light">{{ user.role }}</span>
+                                   </td>
+                                    <th scope="row">
+                                        <a class="btn-link" href="/dashboard/utilisateurs/{{ user.id }}" role="button">{{ user.username }}</a>
+                                    </th>
+                                    <td>{{ user.firstName }} {{ user.lastName | upper }}</td>
+                                    <td>
+                                        <a class="btn-link text-danger" href="/dashboard/utilisateurs/{{ user.id }}/delete" role="button"><i class="far fa-trash-alt"></i></a>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                        {{ pagination | raw }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}

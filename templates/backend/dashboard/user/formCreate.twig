@@ -1,0 +1,95 @@
+{% extends 'backend/layouts/default.twig' %}
+
+{% block title %}
+    <title>Blog PHP : Créer</title>
+{% endblock %}
+
+{% block content %}
+
+    <div class="container my-5 pt-5">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="/dashboard">Administration</a></li>
+                <li class="breadcrumb-item"><a href="/dashboard/utilisateurs">Utilisateurs</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Ajouter</li>
+            </ol>
+        </nav>
+        {% include 'backend/layouts/alert.twig' %}
+        <small>PROFIL</small>
+        <h1 class="my-4">Compte</h1>
+        <form action="/dashboard/utilisateurs/create/" method="post"  enctype="multipart/form-data">
+            {% if session.role == 'ADMINISTRATOR' %}
+                <div class="card shadow-sm mb-5 bg-white rounded border-0">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <h5>Compte désactivé</h5>
+                                <p>Active ou désactive le compte de l'utilisateur.</p>
+                            </div>
+                            <div class="col-md-6 mb-2">
+                                <div class="custom-control custom-switch">
+                                    <input type="checkbox" class="custom-control-input" id="switch1" name="disabled" {% if user.disabled == 1 %} checked {% endif %}>
+                                    <label class="custom-control-label" for="switch1" ></label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <h5>Compte administrateur</h5>
+                                <p>Active les droits administrateur au compte utilisateur.</p>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="custom-control custom-switch">
+                                    <input type="checkbox" class="custom-control-input" id="switch2" name="role" {% if user.role == "ADMINISTRATOR" %} checked {% endif %}>
+                                    <label class="custom-control-label" for="switch2" ></label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+            <div class="row my-5">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="image_profil">Image de profil</label>
+                        <input type="file" class="form-control" id="image_profil" aria-describedby="profil_help" name="avatar">
+                        <small id="profil_help" class="form-text text-muted">Votre image de profil doit être inférieur ou égal à 2 Mo aux formats (jpeg, jpg, png).</small>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Nom d'utilisateur</label>
+                        <input type="email" class="form-control" name="username" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Prénom</label>
+                        <input type="text" class="form-control" name="first_name" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Nom</label>
+                        <input type="text" class="form-control" name="last_name" required>
+                    </div>
+                </div>
+            </div>
+            <hr>
+            <div class="row my-5">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Mot de passe</label>
+                        <input type="password" class="form-control" name="password">
+                    </div>
+                </div>
+                <div class="col-md-6 d-flex align-items-end bd-highlight">
+                    <div class="form-group flex-fill bd-highlight">
+                        <label>Confirmez le mot de passe</label>
+                        <input type="password" class="form-control" name="confirm_password">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 d-flex justify-content-end">
+                    <input class="btn btn-primary ml-2" type="submit" value="Enregistrer">
+                </div>
+            </div>
+        </form>
+    </div>
+
+{% endblock %}
