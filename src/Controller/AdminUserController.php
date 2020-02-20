@@ -5,6 +5,7 @@ namespace App\Controller;
 
 
 use App\Entity\User;
+use App\Libs\Pagination;
 use App\Libs\SessionFlash;
 use App\Libs\UploadImage;
 use App\Render\Twig;
@@ -21,6 +22,8 @@ class AdminUserController
 
     public function index(array $params)
     {
+        $page = $params['get']['page'];
+
         $userRepository = new UserRepository();
         $users = $userRepository->findAll();
 
@@ -28,11 +31,31 @@ class AdminUserController
         $user = $userRepository->find(1);
         $_SESSION['user'] = serialize($user);
 
+        $countUsers = count($userRepository->findAll());
+        $pagination = null;
+
+        if($page === null){
+            $page = 1;
+        }
+
+        if($countUsers > 5) {
+            $PaginationFinal = new Pagination();
+            $PaginationFinal->setCurrentPage($page);
+            $PaginationFinal->setInnerLinks(2);
+            $PaginationFinal->setNbElementsInPage(5);
+            $PaginationFinal->setNbMaxElements($countUsers);
+            $PaginationFinal->setUrl("/dashboard/utilisateurs?page={i}");
+
+            $pagination = $PaginationFinal->renderBootstrapPagination();
+            $users = $PaginationFinal->setContent($users);
+        }
+
         $flash = SessionFlash::renderSessionFlash();
 
         echo $this->twig->getTwig()->render('backend/dashboard/user/index.twig', [
             "users" => $users,
-            "flash" => $flash
+            "flash" => $flash,
+            "pagination" => $pagination
         ]);
     }
 
@@ -85,10 +108,18 @@ class AdminUserController
         $user->setUsername($params['post']['username'])
             ->setLastName($params['post']['last_name'])
             ->setFirstName($params['post']['first_name'])
-            ->setPassword($params['post']['password'])
             ->setDisabled($params['post']['disabled'])
             ->setRole($params['post']['role'])
             ->setAvatar($params['avatar']['name']);
+
+        if($params['post']['password'] === $params['post']['confirm_password']) {
+            $password = password_hash($params['post']['password'], PASSWORD_DEFAULT);
+            $user->setPassword($password);
+        } else {
+            SessionFlash::sessionFlash("danger", "les mots de passe saisis ne sont pas identiques.");
+            header("Location: /dashboard/utilisateurs/form-create");
+            return;
+        }
 
         $userRepository = new UserRepository();
 
@@ -123,7 +154,6 @@ class AdminUserController
 
         $userEntity = new User();
         $user = $userEntity->setId($id)
-            ->setUsername($params['post']['username'])
             ->setLastName($params['post']['last_name'])
             ->setFirstName($params['post']['first_name'])
             ->setAvatar($params['avatar']['name'])

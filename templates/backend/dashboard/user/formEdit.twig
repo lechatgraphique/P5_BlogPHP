@@ -63,7 +63,8 @@
                 <div class="col-md-6">
                     <div class="form-group">
                         <label>Nom d'utilisateur</label>
-                        <input type="email" class="form-control" name="username" value="{{ user.username | lower }}" disabled required>
+                        <input type="hidden" class="form-control" name="username" value="{{ user.username | lower }}" required>
+                        <input type="text" class="form-control" name="" value="{{ user.username | lower }}" disabled >
                     </div>
                     <div class="form-group">
                         <label>Prénom</label>
