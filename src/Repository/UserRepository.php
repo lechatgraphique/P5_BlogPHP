@@ -38,6 +38,18 @@ class UserRepository
         return $req->fetch();
     }
 
+    public function findUser(string $username, string $password): User
+    {
+        $req = $this->db->prepare('SELECT username, password FROM user WHERE username = :username, password = :password');
+
+        $req->bindValue(':username', $username);
+        $req->bindValue(':password', $password);
+        $req->execute();
+        $req->setFetchMode(PDO::FETCH_CLASS,'App\Entity\User');
+
+        return $req->fetch();
+    }
+
     public function create(User $user)
     {
         $req = $this->db->prepare('INSERT INTO user(username, password, avatar, first_name, last_name, disabled, created_at, role) 

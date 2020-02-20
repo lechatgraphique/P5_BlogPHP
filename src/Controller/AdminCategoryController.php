@@ -22,6 +22,23 @@ class AdminCategoryController
 
     public function index(array $params)
     {
+        $user = array_key_exists('user', $_SESSION) ? unserialize($_SESSION['user']) : null;
+
+        if(!isset($user)) {
+            header("Location: /");
+            return;
+
+        } else {
+            header("Location: /");
+            return;
+        }
+
+        if($user->getRole() != "ADMINISTRATOR") {
+            header("Location: /");
+            return;
+
+        }
+
         $page = $params['get']['page'];
 
         $categoryRepository = new CategoryRepository();
@@ -57,6 +74,22 @@ class AdminCategoryController
 
     public function formCreate()
     {
+        $user = array_key_exists('user', $_SESSION) ? unserialize($_SESSION['user']) : null;
+
+        if(!isset($user)) {
+            header("Location: /");
+            return;
+
+        } else {
+            header("Location: /");
+            return;
+        }
+
+        if($user->getRole() != "ADMINISTRATOR") {
+            header("Location: /");
+            return;
+
+        }
         $categoryRepository = new CategoryRepository();
         $categories = $categoryRepository->findAll();
 
@@ -70,6 +103,23 @@ class AdminCategoryController
 
     public function formEdit(array $params)
     {
+        $user = array_key_exists('user', $_SESSION) ? unserialize($_SESSION['user']) : null;
+
+        if(!isset($user)) {
+            header("Location: /");
+            return;
+
+        } else {
+            header("Location: /");
+            return;
+        }
+
+        if($user->getRole() != "ADMINISTRATOR") {
+            header("Location: /");
+            return;
+
+        }
+
         $categoryRepository = new CategoryRepository();
         $category = $categoryRepository->find($params['id']);
 

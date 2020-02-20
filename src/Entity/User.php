@@ -108,7 +108,7 @@ class User
     /**
      * @return string
      */
-    public function getAvatar(): string
+    public function getAvatar(): ?string
     {
         return $this->avatar;
     }

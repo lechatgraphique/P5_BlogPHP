@@ -5,6 +5,7 @@ namespace App\Controller;
 
 
 use App\Render\Twig;
+use App\Repository\UserRepository;
 
 class ConnexionController
 {
@@ -17,6 +18,29 @@ class ConnexionController
 
     public function index()
     {
-        echo $this->twig->getTwig()->render('frontend/login/index.twig', []);
+        $user = array_key_exists('user', $_SESSION) ? unserialize($_SESSION['user']) : null;
+
+        if(!isset($user)) {
+            echo $this->twig->getTwig()->render('frontend/login/index.twig', []);
+
+        } else {
+            header("Location: /");
+            return;
+        }
+
     }
+    public function login(array $params)
+    {
+        $user = array_key_exists('user', $_SESSION) ? unserialize($_SESSION['user']) : null;
+
+        if(!isset($user)) {
+            echo $this->twig->getTwig()->render('frontend/login/index.twig', []);
+
+        } else {
+            header("Location: /");
+            return;
+        }
+        
+    }
+
 }

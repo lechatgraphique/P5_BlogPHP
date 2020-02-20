@@ -7,48 +7,41 @@
 {% block content %}
 
     <div class="container my-5 pt-5">
-        <nav aria-label="breadcrumb">
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="/dashboard">Administration</a></li>
-                <li class="breadcrumb-item"><a href="/dashboard/utilisateurs">Utilisateurs</a></li>
-                <li class="breadcrumb-item active" aria-current="page">{{ user.firstName | lower }} {{ user.lastName | lower }}</li>
-            </ol>
-        </nav>
         {% include 'backend/layouts/alert.twig' %}
         <small>PROFIL</small>
         <h1 class="my-4">Compte</h1>
-        <form action="/dashboard/utilisateurs/update/" method="post"  enctype="multipart/form-data">
+        <form action="/dashboard/profil/update/" method="post"  enctype="multipart/form-data">
             {% if session.role == 'ADMINISTRATOR' %}
-            <div class="card shadow-sm mb-5 bg-white rounded border-0">
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-md-6">
-                            <h5>Compte désactivé</h5>
-                            <p>Active ou désactive le compte de l'utilisateur.</p>
-                        </div>
-                        <div class="col-md-6 mb-2">
-                            <div class="custom-control custom-switch">
-                                <input type="checkbox" class="custom-control-input" id="switch1" name="disabled" {% if user.disabled == 1 %} checked {% endif %}>
-                                <label class="custom-control-label" for="switch1" ></label>
+                <div class="card shadow-sm mb-5 bg-white rounded border-0">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <h5>Compte désactivé</h5>
+                                <p>Active ou désactive le compte de l'utilisateur.</p>
                             </div>
-                        </div>
-                        <div class="col-md-6">
-                            <h5>Compte administrateur</h5>
-                            <p>Active les droits administrateur au compte utilisateur.</p>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="custom-control custom-switch">
-                                <input type="checkbox" class="custom-control-input" id="switch2" name="role" {% if user.role == "ADMINISTRATOR" %} checked {% endif %}>
-                                <label class="custom-control-label" for="switch2" ></label>
+                            <div class="col-md-6 mb-2">
+                                <div class="custom-control custom-switch">
+                                    <input type="checkbox" class="custom-control-input" id="switch1" name="disabled" {% if user.disabled == 1 %} checked {% endif %}>
+                                    <label class="custom-control-label" for="switch1" ></label>
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-md-12">
-                            <hr>
-                            <a class="btn btn-outline-danger" href="/dashboard/utilisateurs/{{ user.id }}/delete" role="button">Supprimer le compte définitivement</a>
+                            <div class="col-md-6">
+                                <h5>Compte administrateur</h5>
+                                <p>Active les droits administrateur au compte utilisateur.</p>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="custom-control custom-switch">
+                                    <input type="checkbox" class="custom-control-input" id="switch2" name="role" {% if user.role == "ADMINISTRATOR" %} checked {% endif %}>
+                                    <label class="custom-control-label" for="switch2" ></label>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <hr>
+                                <a class="btn btn-outline-danger" href="/dashboard/utilisateurs/{{ user.id }}/delete" role="button">Supprimer le compte définitivement</a>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
             {% endif %}
             <input type="hidden" name="id" value="{{ user.id }}">
             <div class="row my-5">

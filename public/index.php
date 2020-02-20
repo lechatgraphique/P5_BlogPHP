@@ -15,10 +15,14 @@ $router->map('GET', '/', 'App\Controller\PostController#home');
 $router->map('GET', '/articles', 'App\Controller\PostController#index');
 $router->map('GET', '/articles/[*:slug]-[i:id]', 'App\Controller\PostController#show');
 $router->map('GET', '/contact', 'App\Controller\ContactController#index');
-$router->map('GET', '/inscription', 'App\Controller\InscriptionController#index');
-$router->map('GET', '/connexion', 'App\Controller\ConnexionController#index');
 
-$router->map('GET', '/dashboard', 'App\Controller\AdminPostController#index');
+$router->map('GET', '/inscription', 'App\Controller\InscriptionController#index');
+$router->map('POST', '/inscription/create/', 'App\Controller\InscriptionController#create');
+
+$router->map('GET', '/connexion', 'App\Controller\ConnexionController#index');
+$router->map('POST', '/connexion/login/', 'App\Controller\ConnexionController#login');
+
+$router->map('GET', '/dashboard', 'App\Controller\AdminController#index');
 
 $router->map('GET', '/dashboard/articles', 'App\Controller\AdminPostController#index');
 $router->map('GET', '/dashboard/articles/[*:slug]-[i:id]', 'App\Controller\AdminPostController#formEdit');
@@ -40,6 +44,14 @@ $router->map('POST','/dashboard/utilisateurs/update/', 'App\Controller\AdminUser
 $router->map('GET','/dashboard/utilisateurs/[i:id]/delete', 'App\Controller\AdminUserController#delete');
 $router->map('GET','/dashboard/utilisateurs/form-create', 'App\Controller\AdminUserController#formCreate');
 $router->map('POST','/dashboard/utilisateurs/create/', 'App\Controller\AdminUserController#create');
+
+$router->map('GET','/dashboard/commentaires', 'App\Controller\AdminCommentController#index');
+$router->map('GET','/dashboard/commentaires/[i:id]/delete', 'App\Controller\AdminCommentController#delete');
+$router->map('GET','/dashboard/commentaires/[i:id]/update', 'App\Controller\AdminCommentController#update');
+
+$router->map('GET','/profil', 'App\Controller\ProfilController#index');
+$router->map('GET','/profil/[i:id]/update', 'App\Controller\ProfilController#update');
+
 
 $match = $router->match();
 

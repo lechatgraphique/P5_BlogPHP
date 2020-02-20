@@ -45,6 +45,16 @@ class Comment
     }
 
     /**
+     * @param int $id
+     * @return int
+     */
+    public function setId(int $id): object
+    {
+        $this->id = $id;
+        return $this;
+    }
+
+    /**
      * @return string
      */
     public function getContent(): string
@@ -112,23 +122,23 @@ class Comment
      */
     public function setCreatedAt(string $create_at): string
     {
-        $this->created_at_at = $create_at;
+        $this->created_at = $create_at;
         return $this;
     }
 
     /**
-     * @return bool
+     * @return int
      */
-    public function isIsValidated(): bool
+    public function getIsValidated(): int
     {
         return $this->is_validated;
     }
 
     /**
      * @param bool $is_validated
-     * @return string
+     * @return object
      */
-    public function setIsValidated(bool $is_validated): string
+    public function setIsValidated(bool $is_validated): object
     {
         $this->is_validated = $is_validated;
         return $this;

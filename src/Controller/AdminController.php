@@ -18,6 +18,21 @@ class AdminController
 
     public function index()
     {
-        echo $this->twig->getTwig()->render('backend/dashboard/index.twig', []);
+        $user = array_key_exists('user', $_SESSION) ? unserialize($_SESSION['user']) : null;
+
+        if(!isset($user)) {
+            header("Location: /");
+            return;
+
+        } else {
+            header("Location: /");
+            return;
+        }
+
+        if($user->getRole() != "ADMINISTRATOR") {
+            header("Location: /");
+            return;
+
+        }
     }
 }

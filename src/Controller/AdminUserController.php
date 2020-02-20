@@ -22,14 +22,15 @@ class AdminUserController
 
     public function index(array $params)
     {
+
+
         $page = $params['get']['page'];
 
         $userRepository = new UserRepository();
         $users = $userRepository->findAll();
 
-        // Test
-        $user = $userRepository->find(1);
-        $_SESSION['user'] = serialize($user);
+        // $user = $userRepository->find(1);
+        // $_SESSION['user'] = serialize($user);
 
         $countUsers = count($userRepository->findAll());
         $pagination = null;
@@ -61,6 +62,23 @@ class AdminUserController
 
     public function formCreate(array $params)
     {
+        $user = array_key_exists('user', $_SESSION) ? unserialize($_SESSION['user']) : null;
+
+        if(!isset($user)) {
+            header("Location: /");
+            return;
+
+        } else {
+            header("Location: /");
+            return;
+        }
+
+        if($user->getRole() != "ADMINISTRATOR") {
+            header("Location: /");
+            return;
+
+        }
+
         $flash = SessionFlash::renderSessionFlash();
 
         echo $this->twig->getTwig()->render('backend/dashboard/user/formCreate.twig', [
@@ -70,6 +88,8 @@ class AdminUserController
 
     public function formEdit(array $params)
     {
+
+
         $userRepository = new UserRepository();
         $user = $userRepository->find($params['id']);
 
@@ -83,6 +103,23 @@ class AdminUserController
 
     public function create(array $params)
     {
+        $user = array_key_exists('user', $_SESSION) ? unserialize($_SESSION['user']) : null;
+
+        if(!isset($user)) {
+            header("Location: /");
+            return;
+
+        } else {
+            header("Location: /");
+            return;
+        }
+
+        if($user->getRole() != "ADMINISTRATOR") {
+            header("Location: /");
+            return;
+
+        }
+
         $params['avatar'] = $params['post']['avatar'];
 
         $uploadImage = new UploadImage(
@@ -145,6 +182,8 @@ class AdminUserController
 
     public function update(array $params)
     {
+
+
         $id = (int)$params['post']['id'];
         $params['avatar'] = $params['post']['avatar'];
         $password = $params['post']['password'];
@@ -154,6 +193,7 @@ class AdminUserController
 
         $userEntity = new User();
         $user = $userEntity->setId($id)
+            ->setUsername($params['post']['username'])
             ->setLastName($params['post']['last_name'])
             ->setFirstName($params['post']['first_name'])
             ->setAvatar($params['avatar']['name'])
@@ -208,6 +248,23 @@ class AdminUserController
 
     public function delete(array $params)
     {
+        $user = array_key_exists('user', $_SESSION) ? unserialize($_SESSION['user']) : null;
+
+        if(!isset($user)) {
+            header("Location: /");
+            return;
+
+        } else {
+            header("Location: /");
+            return;
+        }
+
+        if($user->getRole() != "ADMINISTRATOR") {
+            header("Location: /");
+            return;
+
+        }
+
         $id = (int)$params['id'];
 
         $userRepository = new UserRepository();

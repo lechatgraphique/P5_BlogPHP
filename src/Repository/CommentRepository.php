@@ -25,6 +25,7 @@ class CommentRepository
         $req->setFetchMode(PDO::FETCH_CLASS,Comment::class);
 
         return $req->fetchAll();
+
     }
 
     public function find($id)
@@ -56,4 +57,20 @@ class CommentRepository
 
         return $comments;
     }
+
+    public function delete(Comment $comment)
+    {
+        $req = $this->db->prepare('DELETE FROM comment WHERE id = :id');
+        $req->bindValue(':id', $comment->getId());
+        $req->execute();
+    }
+
+    public function validatedComment(Comment $comment)
+    {
+        $req = $this->db->prepare('UPDATE comment SET is_validated = :isValidated WHERE id = :id');
+        $req->bindValue(':id', $comment->getId());
+        $req->bindValue(':isValidated', $comment->getIsValidated());
+        $req->execute();
+    }
+
 }

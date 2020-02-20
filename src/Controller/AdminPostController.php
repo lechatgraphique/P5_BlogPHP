@@ -22,6 +22,23 @@ class AdminPostController
 
     public function index(array $params)
     {
+        $user = array_key_exists('user', $_SESSION) ? unserialize($_SESSION['user']) : null;
+
+        if(!isset($user)) {
+            header("Location: /");
+            return;
+
+        } else {
+            header("Location: /");
+            return;
+        }
+
+        if($user->getRole() != "ADMINISTRATOR") {
+            header("Location: /");
+            return;
+
+        }
+
         $page = $params['get']['page'];
 
         $postRepository = new PostRepository();
@@ -57,6 +74,23 @@ class AdminPostController
 
     public function formCreate()
     {
+        $user = array_key_exists('user', $_SESSION) ? unserialize($_SESSION['user']) : null;
+
+        if(!isset($user)) {
+            header("Location: /");
+            return;
+
+        } else {
+            header("Location: /");
+            return;
+        }
+
+        if($user->getRole() != "ADMINISTRATOR") {
+            header("Location: /");
+            return;
+
+        }
+
         $categoryRepository = new CategoryRepository();
         $categories = $categoryRepository->findAll();
 
@@ -70,6 +104,23 @@ class AdminPostController
 
     public function formEdit(array $params)
     {
+        $user = array_key_exists('user', $_SESSION) ? unserialize($_SESSION['user']) : null;
+
+        if(!isset($user)) {
+            header("Location: /");
+            return;
+
+        } else {
+            header("Location: /");
+            return;
+        }
+
+        if($user->getRole() != "ADMINISTRATOR") {
+            header("Location: /");
+            return;
+
+        }
+
         $postRepository = new PostRepository();
         $post = $postRepository->find($params['id']);
 
@@ -87,6 +138,23 @@ class AdminPostController
 
     public function create(array $params)
     {
+        $user = array_key_exists('user', $_SESSION) ? unserialize($_SESSION['user']) : null;
+
+        if(!isset($user)) {
+            header("Location: /");
+            return;
+
+        } else {
+            header("Location: /");
+            return;
+        }
+
+        if($user->getRole() != "ADMINISTRATOR") {
+            header("Location: /");
+            return;
+
+        }
+
         $params['post_img'] = $params['post']['image_post'];
 
         $uploadImage = new UploadImage(
@@ -124,6 +192,23 @@ class AdminPostController
 
     public function update(array $params)
     {
+        $user = array_key_exists('user', $_SESSION) ? unserialize($_SESSION['user']) : null;
+
+        if(!isset($user)) {
+            header("Location: /");
+            return;
+
+        } else {
+            header("Location: /");
+            return;
+        }
+
+        if($user->getRole() != "ADMINISTRATOR") {
+            header("Location: /");
+            return;
+
+        }
+
         $params['post_img'] = $params['post']['image_post'];
 
         $postRepository = new PostRepository();
@@ -170,6 +255,23 @@ class AdminPostController
 
     public function delete(array $params)
     {
+        $user = array_key_exists('user', $_SESSION) ? unserialize($_SESSION['user']) : null;
+
+        if(!isset($user)) {
+            header("Location: /");
+            return;
+
+        } else {
+            header("Location: /");
+            return;
+        }
+
+        if($user->getRole() != "ADMINISTRATOR") {
+            header("Location: /");
+            return;
+
+        }
+
         $id = (int)$params['id'];
 
         $postRepository = new PostRepository();
