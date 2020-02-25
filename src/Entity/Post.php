@@ -311,19 +311,25 @@ class Post
     }
 
     /**
-     * @return bool
+     * @return int
      */
-    public function getIsIsValidated(): bool
+    public function getIsValidated(): int
     {
         return $this->is_validated;
     }
 
     /**
-     * @param bool $is_validated
-     * @return bool
+     * @param $is_validated
+     * @return object
      */
-    public function setIsValidated(bool $is_validated): object
+    public function setIsValidated($is_validated): object
     {
+        if($is_validated == 'on') {
+            $is_validated = 1;
+        } elseif (!isset($is_validated)) {
+            $is_validated = 0;
+        }
+
         $this->is_validated = $is_validated;
         return $this;
     }
