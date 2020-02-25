@@ -41,6 +41,30 @@ class PostRepository
         return $posts;
     }
 
+    public function findValidated(): array
+    {
+        $req = $this->db->query('SELECT * FROM post WHERE is_validated = 1 ORDER BY created_at DESC');
+
+        $req->execute();
+        $req->setFetchMode(PDO::FETCH_CLASS,'App\Entity\Post');
+
+        $posts = $req->fetchAll();
+
+        foreach ($posts as $post)
+        {
+            $userRepository = new UserRepository();
+            $post->setAuthor($userRepository->find($post->getUserId())); // Créer une function plus tard
+
+            $categoryRepository = new CategoryRepository();
+            $post->setCategory($categoryRepository->find($post->getCategoryId()));
+
+            $commentRepository = new CommentRepository();
+            $post->setComments($commentRepository->findByPostId($post->getId()));
+        }
+
+        return $posts;
+    }
+
     public function find(int $id): Post
     {
         $req = $this->db->prepare('SELECT * FROM post WHERE id = :id');

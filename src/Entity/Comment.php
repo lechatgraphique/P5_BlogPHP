@@ -12,6 +12,11 @@ class Comment
     private $id;
 
     /**
+     * @var int
+     */
+    private $post_id;
+
+    /**
      * @var string
      */
     private $content;
@@ -55,6 +60,24 @@ class Comment
     }
 
     /**
+     * @return int
+     */
+    public function getPostId(): int
+    {
+        return $this->post_id;
+    }
+
+    /**
+     * @param $post_id
+     * @return object
+     */
+    public function setPostId($post_id): object
+    {
+        $this->post_id = $post_id;
+        return $this;
+    }
+
+    /**
      * @return string
      */
     public function getContent(): string
@@ -64,9 +87,9 @@ class Comment
 
     /**
      * @param string $content
-     * @return string
+     * @return object
      */
-    public function setContent(string $content): string
+    public function setContent(string $content): object
     {
         $this->content = $content;
         return $this;
@@ -81,10 +104,10 @@ class Comment
     }
 
     /**
-     * @param int $user_id
-     * @return int
+     * @param string $user_id
+     * @return object
      */
-    public function setUserId(int $user_id): int
+    public function setUserId(string $user_id): object
     {
         $this->user_id = $user_id;
         return $this;

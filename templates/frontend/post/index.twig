@@ -21,29 +21,27 @@
     <div class="container mb-4">
         <div class="row">
             {% for post in posts %}
-                {% if post.isValidated %}
-                <div class="col-md-4 mb-5">
-                    <div class="card h-100">
-                        <img class="card-img-top img-crop-thumb" src="/uploads/posts/{{ post.image }}" alt="{{ post.image }}">
-                        <div class="card-body">
-                            <a href="articles/{{ post.slug }}-{{ post.id }}"><h4 class="card-title text-dark">{{ post.title }}</h4></a>
-                            <p class="card-text">{{ post.description | truncate(100) }}</p>
-                            {% if post.category %}
-                                <small>
-                                    <i class="fas fa-tags"></i> <a class=" btn-link text-dark" href="#" role="button">{{ post.category.title }}</a>
-                                </small>
-                            {% endif %}
-                        </div>
-                        <div class="card-footer">
-                            <small><div>Publié par <b>{{ post.author.firstName }} {{ post.author.lastName }}</b></div></small>
+            <div class="col-md-4 mb-5">
+                <div class="card h-100">
+                    <img class="card-img-top img-crop-thumb" src="/uploads/posts/{{ post.image }}" alt="{{ post.image }}">
+                    <div class="card-body">
+                        <a href="articles/{{ post.slug }}-{{ post.id }}"><h4 class="card-title text-dark">{{ post.title }}</h4></a>
+                        <p class="card-text">{{ post.description | truncate(100) }}</p>
+                        {% if post.category %}
                             <small>
-                                <i class="far fa-calendar-alt"></i> {{ post.createdAt | dateFR }} |
-                                <i class="far fa-comments"></i> {{ post.comments | length }}
+                                <i class="fas fa-tags"></i> <a class=" btn-link text-dark" href="#" role="button">{{ post.category.title }}</a>
                             </small>
-                        </div>
+                        {% endif %}
+                    </div>
+                    <div class="card-footer">
+                        <small><div>Publié par <b>{{ post.author.firstName }} {{ post.author.lastName }}</b></div></small>
+                        <small>
+                            <i class="far fa-calendar-alt"></i> {{ post.createdAt | dateFR }} |
+                            <i class="far fa-comments"></i> {{ post.comments | length }}
+                        </small>
                     </div>
                 </div>
-                {% endif %}
+            </div>
             {% endfor %}
         </div>
         {{ pagination | raw }}

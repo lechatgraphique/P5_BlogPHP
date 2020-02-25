@@ -17,15 +17,26 @@ class CommentRepository
         $this->db = DBConnexion::dbConnect();
     }
 
-    public function findAll()
+    public function findAll(): array
     {
-        $req = $this->db->query('SELECT * FROM comment ORDER BY created_at DESC LIMIT 0, 5');
+        $req = $this->db->query('SELECT * FROM comment ORDER BY created_at DESC');
 
         $req->execute();
         $req->setFetchMode(PDO::FETCH_CLASS,Comment::class);
 
         return $req->fetchAll();
 
+    }
+
+    public function findValidated($postId): array
+    {
+        $req = $this->db->prepare('SELECT * FROM comment WHERE post_id = :postId AND is_validated = 1 ORDER BY created_at DESC');
+        $req->bindValue(':postId', (int)$postId);
+
+        $req->execute();
+        $req->setFetchMode(PDO::FETCH_CLASS,Comment::class);
+
+        return $req->fetchAll();
     }
 
     public function find($id)
@@ -56,6 +67,16 @@ class CommentRepository
         }
 
         return $comments;
+    }
+    public function create(Comment $comment)
+    {
+        $req = $this->db->prepare('INSERT INTO comment(post_id, user_id, content, is_validated, created_at) VALUES(:postId, :userId, :content, :isValidated, NOW())');
+        $req->bindValue(':postId', $comment->getPostId());
+        $req->bindValue(':userId', $comment->getUserId());
+        $req->bindValue(':content', $comment->getContent());
+        $req->bindValue(':isValidated', $comment->getIsValidated());
+
+        $req->execute();
     }
 
     public function delete(Comment $comment)

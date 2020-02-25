@@ -6,8 +6,8 @@ namespace App\Controller;
 
 use App\Libs\Pagination;
 use App\Render\Twig;
+use App\Repository\CommentRepository;
 use App\Repository\PostRepository;
-
 
 class PostController
 {
@@ -33,9 +33,9 @@ class PostController
         $page = $params['get']['page'];
 
         $postRepository = new PostRepository();
-        $posts = $postRepository->findAll();
+        $posts = $postRepository->findValidated();
 
-        $countPosts = count($postRepository->findAll());
+        $countPosts = count($posts);
 
         $pagination = null;
 
@@ -55,7 +55,6 @@ class PostController
             $posts = $PaginationFinal->setContent($posts);
         }
 
-
         echo $this->twig->getTwig()->render('frontend/post/index.twig', [
             'posts' => $posts,
             "pagination" => $pagination
@@ -64,13 +63,39 @@ class PostController
 
     public function show($params)
     {
+
+        $page = $params['get']['page'];
+
         $postRepository = new PostRepository();
         $post = $postRepository->find($params['id']);
-        $comments = $post->getComments();
+
+        $commentRepository = new CommentRepository();
+        $comments = $commentRepository->findValidated($params['id']);
+
+        $countComments = count($comments);
+
+        $pagination = null;
+
+        if($page === null){
+            $page = 1;
+        }
+
+        if($countComments > 5) {
+            $PaginationFinal = new Pagination();
+            $PaginationFinal->setCurrentPage($page);
+            $PaginationFinal->setInnerLinks(2);
+            $PaginationFinal->setNbElementsInPage(5);
+            $PaginationFinal->setNbMaxElements($countComments);
+            $PaginationFinal->setUrl("/articles/{$post->getSlug()}-{$post->getId()}?page={i}");
+
+            $pagination = $PaginationFinal->renderBootstrapPagination();
+            $comments = $PaginationFinal->setContent($comments);
+        }
 
         echo $this->twig->getTwig()->render('frontend/post/show.twig', [
             'post' => $post,
-            'comments' => $comments
+            'comments' => $comments,
+            "pagination" => $pagination
         ]);
     }
 }

@@ -12,6 +12,8 @@ $router = new AltoRouter();
 $router->map('GET', '/', 'App\Controller\PostController#home');
 $router->map('GET', '/articles', 'App\Controller\PostController#index');
 $router->map('GET', '/articles/[*:slug]-[i:id]', 'App\Controller\PostController#show');
+$router->map('POST', '/commentaire/create/', 'App\Controller\CommentController#create');
+$router->map('GET', '/commentaire/[i:id]/delete', 'App\Controller\CommentController#delete');
 $router->map('GET', '/contact', 'App\Controller\ContactController#index');
 
 $router->map('GET', '/inscription', 'App\Controller\InscriptionController#index');

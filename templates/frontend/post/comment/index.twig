@@ -1,26 +1,22 @@
 <div class="container mb-5">
     {% for comment in comments %}
-
-    <div class="media mb-4">
-        <img class="d-flex mr-3 rounded-circle" src="http://placehold.it/50x50" alt="">
-        <div class="media-body">
-            <h5 class="mt-0">{{ comment.author.firstName }} {{ comment.author.lastName }}</h5>
-            <small><i class="far fa-calendar-alt"></i> Publié le {{ comment.createdAt | dateFR }}</small>
-            <hr>
-            <p>{{ comment.content }}</p>
-        </div>
-    </div>
-
+            <div class="media mb-4">
+                <img class="d-flex mr-3 rounded-circle" src="http://placehold.it/50x50" alt="">
+                <div class="media-body">
+                    <h5 class="mt-0">{{ comment.author.firstName }} {{ comment.author.lastName }}</h5>
+                    <small><i class="far fa-calendar-alt"></i> Publié le {{ comment.createdAt | dateFR }}</small>
+                    <hr>
+                    <p>{{ comment.content }}</p>
+                    {% if comment.userId == session.id %}
+                        <td class="text-right">
+                            <a class="btn-link text-danger" href="/commentaire/{{ comment.id }}/delete" role="button"><i class="far fa-trash-alt"></i></a>
+                        </td>
+                    {% endif %}
+                </div>
+            </div>
     {% endfor %}
-
-    <nav aria-label="page navigation example" class="d-flex justify-content-end">
-        <ul class="pagination mt-3">
-            <li class="page-item"><a class="page-link" href="#">Précédent</a></li>
-            <li class="page-item"><a class="page-link" href="#">1</a></li>
-            <li class="page-item"><a class="page-link" href="#">2</a></li>
-            <li class="page-item"><a class="page-link" href="#">3</a></li>
-            <li class="page-item"><a class="page-link" href="#">Suivant</a></li>
-        </ul>
-    </nav>
+    <div class="d-flex justify-content-end mb-3">
+        {{ pagination | raw }}
+    </div>
 </div>
 

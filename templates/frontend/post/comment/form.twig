@@ -1,13 +1,24 @@
 <div class="container">
+{% if not session %}
     <div class="card my-4">
         <h5 class="card-header">Ajouter un commentaire</h5>
         <div class="card-body">
-            <form>
+            <a class="btn btn-primary" href="/inscription" role="button">Inscription</a>
+        </div>
+    </div>
+{% else %}
+    <div class="card my-4">
+        <h5 class="card-header">Ajouter un commentaire</h5>
+        <div class="card-body">
+            <form action="/commentaire/create/" method="post">
+                <input type="hidden" name="user_id" value="{{ session.id }}">
+                <input type="hidden" name="post_id" value="{{ post.id }}">
                 <div class="form-group">
-                    <textarea class="form-control" rows="3"></textarea>
+                    <textarea class="form-control" rows="3" name="content"></textarea>
                 </div>
                 <button type="submit" class="btn btn-primary">Envoyer</button>
             </form>
         </div>
     </div>
+{% endif %}
 </div>
