@@ -5,6 +5,7 @@ namespace App\Controller;
 
 
 use App\Entity\User;
+use App\Libs\Auth;
 use App\Libs\Pagination;
 use App\Libs\SessionFlash;
 use App\Libs\UploadImage;
@@ -22,15 +23,15 @@ class AdminUserController
 
     public function index(array $params)
     {
-
+        if(Auth::user()->getRole() != 'ADMINISTRATOR') {
+            header("Location: /");
+            return;
+        }
 
         $page = $params['get']['page'];
 
         $userRepository = new UserRepository();
         $users = $userRepository->findAll();
-
-        // $user = $userRepository->find(1);
-        // $_SESSION['user'] = serialize($user);
 
         $countUsers = count($userRepository->findAll());
         $pagination = null;
@@ -62,21 +63,9 @@ class AdminUserController
 
     public function formCreate(array $params)
     {
-        $user = array_key_exists('user', $_SESSION) ? unserialize($_SESSION['user']) : null;
-
-        if(!isset($user)) {
+        if(Auth::user()->getRole() != 'ADMINISTRATOR') {
             header("Location: /");
             return;
-
-        } else {
-            header("Location: /");
-            return;
-        }
-
-        if($user->getRole() != "ADMINISTRATOR") {
-            header("Location: /");
-            return;
-
         }
 
         $flash = SessionFlash::renderSessionFlash();
@@ -88,7 +77,10 @@ class AdminUserController
 
     public function formEdit(array $params)
     {
-
+        if(Auth::user()->getRole() != 'ADMINISTRATOR') {
+            header("Location: /");
+            return;
+        }
 
         $userRepository = new UserRepository();
         $user = $userRepository->find($params['id']);
@@ -103,21 +95,9 @@ class AdminUserController
 
     public function create(array $params)
     {
-        $user = array_key_exists('user', $_SESSION) ? unserialize($_SESSION['user']) : null;
-
-        if(!isset($user)) {
+        if(Auth::user()->getRole() != 'ADMINISTRATOR') {
             header("Location: /");
             return;
-
-        } else {
-            header("Location: /");
-            return;
-        }
-
-        if($user->getRole() != "ADMINISTRATOR") {
-            header("Location: /");
-            return;
-
         }
 
         $params['avatar'] = $params['post']['avatar'];
@@ -182,7 +162,10 @@ class AdminUserController
 
     public function update(array $params)
     {
-
+        if(Auth::user()->getRole() != 'ADMINISTRATOR') {
+            header("Location: /");
+            return;
+        }
 
         $id = (int)$params['post']['id'];
         $params['avatar'] = $params['post']['avatar'];
@@ -206,7 +189,7 @@ class AdminUserController
 
             if($verifyPassword) {
                 if($params['post']['new_password'] === $params['post']['confirm_password']) {
-                    $password = password_hash($password, PASSWORD_DEFAULT);
+                    $password = password_hash($params['post']['new_password'], PASSWORD_DEFAULT);
                     $user->setPassword($password);
                 } else {
                     SessionFlash::sessionFlash("danger", "les mots de passe saisis ne sont pas identiques.");
@@ -248,21 +231,9 @@ class AdminUserController
 
     public function delete(array $params)
     {
-        $user = array_key_exists('user', $_SESSION) ? unserialize($_SESSION['user']) : null;
-
-        if(!isset($user)) {
+        if(Auth::user()->getRole() != 'ADMINISTRATOR') {
             header("Location: /");
             return;
-
-        } else {
-            header("Location: /");
-            return;
-        }
-
-        if($user->getRole() != "ADMINISTRATOR") {
-            header("Location: /");
-            return;
-
         }
 
         $id = (int)$params['id'];

@@ -4,6 +4,7 @@
 namespace App\Controller;
 
 
+use App\Libs\Pagination;
 use App\Render\Twig;
 use App\Repository\PostRepository;
 
@@ -27,14 +28,37 @@ class PostController
         ]);
     }
 
-    public function index()
+    public function index(array $params)
     {
+        $page = $params['get']['page'];
+
         $postRepository = new PostRepository();
         $posts = $postRepository->findAll();
 
-        ;
+        $countPosts = count($postRepository->findAll());
+
+        $pagination = null;
+
+        if($page === null){
+            $page = 1;
+        }
+
+        if($countPosts > 6) {
+            $PaginationFinal = new Pagination();
+            $PaginationFinal->setCurrentPage($page);
+            $PaginationFinal->setInnerLinks(2);
+            $PaginationFinal->setNbElementsInPage(6);
+            $PaginationFinal->setNbMaxElements($countPosts);
+            $PaginationFinal->setUrl("/articles?page={i}");
+
+            $pagination = $PaginationFinal->renderBootstrapPagination();
+            $posts = $PaginationFinal->setContent($posts);
+        }
+
+
         echo $this->twig->getTwig()->render('frontend/post/index.twig', [
-            'posts' => $posts
+            'posts' => $posts,
+            "pagination" => $pagination
         ]);
     }
 

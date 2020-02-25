@@ -5,6 +5,7 @@ namespace App\Controller;
 
 
 use App\Entity\Comment;
+use App\Libs\Auth;
 use App\Libs\Pagination;
 use App\Libs\SessionFlash;
 use App\Render\Twig;
@@ -22,49 +23,13 @@ class AdminCommentController
 
     public function index(array $params)
     {
-        $user = array_key_exists('user', $_SESSION) ? unserialize($_SESSION['user']) : null;
-
-        if(!isset($user)) {
-            header("Location: /");
-            return;
-
-        } else {
+        if(Auth::user()->getRole() != 'ADMINISTRATOR') {
             header("Location: /");
             return;
         }
-
-        if($user->getRole() != "ADMINISTRATOR") {
-            header("Location: /");
-            return;
-
-        }
-
-        $page = $params['get']['page'];
 
         $postRepository = new PostRepository();
         $posts = $postRepository->findAll();
-
-
-        $countPosts = count($postRepository->findAll());
-        $pagination = null;
-
-        if($page === null){
-            $page = 1;
-        }
-
-        if($countPosts > 5) {
-            $PaginationFinal = new Pagination();
-            $PaginationFinal->setCurrentPage($page);
-            $PaginationFinal->setInnerLinks(2);
-            $PaginationFinal->setNbElementsInPage(5);
-            $PaginationFinal->setNbMaxElements($countPosts);
-            $PaginationFinal->setUrl("/dashboard/articles?page={i}");
-
-            $pagination = $PaginationFinal->renderBootstrapPagination();
-            $posts = $PaginationFinal->setContent($posts);
-
-
-        }
 
         $flash = SessionFlash::renderSessionFlash();
 
@@ -72,27 +37,15 @@ class AdminCommentController
             "posts" => $posts,
 
             "flash" => $flash,
-            "pagination" => $pagination
+
         ]);
     }
 
     public function update(array $params)
     {
-        $user = array_key_exists('user', $_SESSION) ? unserialize($_SESSION['user']) : null;
-
-        if(!isset($user)) {
+        if(Auth::user()->getRole() != 'ADMINISTRATOR') {
             header("Location: /");
             return;
-
-        } else {
-            header("Location: /");
-            return;
-        }
-
-        if($user->getRole() != "ADMINISTRATOR") {
-            header("Location: /");
-            return;
-
         }
 
         $id = (int)$params['id'];
@@ -111,21 +64,9 @@ class AdminCommentController
 
     public function delete(array $params)
     {
-        $user = array_key_exists('user', $_SESSION) ? unserialize($_SESSION['user']) : null;
-
-        if(!isset($user)) {
+        if(Auth::user()->getRole() != 'ADMINISTRATOR') {
             header("Location: /");
             return;
-
-        } else {
-            header("Location: /");
-            return;
-        }
-
-        if($user->getRole() != "ADMINISTRATOR") {
-            header("Location: /");
-            return;
-
         }
 
         $id = (int)$params['id'];

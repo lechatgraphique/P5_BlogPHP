@@ -4,6 +4,8 @@
 namespace App\Controller;
 
 
+use App\Libs\Auth;
+use App\Libs\SessionFlash;
 use App\Render\Twig;
 use App\Repository\UserRepository;
 
@@ -18,29 +20,34 @@ class ConnexionController
 
     public function index()
     {
-        $user = array_key_exists('user', $_SESSION) ? unserialize($_SESSION['user']) : null;
-
-        if(!isset($user)) {
-            echo $this->twig->getTwig()->render('frontend/login/index.twig', []);
-
-        } else {
+        if(Auth::user()) {
             header("Location: /");
-            return;
+        } else {
+            echo $this->twig->getTwig()->render('frontend/login/index.twig', []);
         }
-
     }
+
     public function login(array $params)
     {
-        $user = array_key_exists('user', $_SESSION) ? unserialize($_SESSION['user']) : null;
 
-        if(!isset($user)) {
-            echo $this->twig->getTwig()->render('frontend/login/index.twig', []);
 
-        } else {
+        $userRepository = new UserRepository();
+        $user = $userRepository->findUser($params['post']['username']);
+
+        if($user && password_verify($params['post']['password'], $user->getPassword())) {
+            Auth::login($user);
             header("Location: /");
             return;
+        } else {
+            SessionFlash::sessionFlash("danger", "Identifants incrorrecte.");
+            header("Location: /connexion");
+            return;
         }
-        
     }
 
+    public function disconnect(array $params)
+    {
+       Auth::logoff();
+       header("Location: /");
+    }
 }

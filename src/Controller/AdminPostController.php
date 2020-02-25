@@ -4,6 +4,7 @@
 namespace App\Controller;
 
 use App\Entity\Post;
+use App\Libs\Auth;
 use App\Libs\Pagination;
 use App\Libs\SessionFlash;
 use App\Libs\UploadImage;
@@ -22,21 +23,9 @@ class AdminPostController
 
     public function index(array $params)
     {
-        $user = array_key_exists('user', $_SESSION) ? unserialize($_SESSION['user']) : null;
-
-        if(!isset($user)) {
+        if(Auth::user()->getRole() != 'ADMINISTRATOR') {
             header("Location: /");
             return;
-
-        } else {
-            header("Location: /");
-            return;
-        }
-
-        if($user->getRole() != "ADMINISTRATOR") {
-            header("Location: /");
-            return;
-
         }
 
         $page = $params['get']['page'];
@@ -74,21 +63,9 @@ class AdminPostController
 
     public function formCreate()
     {
-        $user = array_key_exists('user', $_SESSION) ? unserialize($_SESSION['user']) : null;
-
-        if(!isset($user)) {
+        if(Auth::user()->getRole() != 'ADMINISTRATOR') {
             header("Location: /");
             return;
-
-        } else {
-            header("Location: /");
-            return;
-        }
-
-        if($user->getRole() != "ADMINISTRATOR") {
-            header("Location: /");
-            return;
-
         }
 
         $categoryRepository = new CategoryRepository();
@@ -104,21 +81,9 @@ class AdminPostController
 
     public function formEdit(array $params)
     {
-        $user = array_key_exists('user', $_SESSION) ? unserialize($_SESSION['user']) : null;
-
-        if(!isset($user)) {
+        if(Auth::user()->getRole() != 'ADMINISTRATOR') {
             header("Location: /");
             return;
-
-        } else {
-            header("Location: /");
-            return;
-        }
-
-        if($user->getRole() != "ADMINISTRATOR") {
-            header("Location: /");
-            return;
-
         }
 
         $postRepository = new PostRepository();
@@ -138,21 +103,9 @@ class AdminPostController
 
     public function create(array $params)
     {
-        $user = array_key_exists('user', $_SESSION) ? unserialize($_SESSION['user']) : null;
-
-        if(!isset($user)) {
+        if(Auth::user()->getRole() != 'ADMINISTRATOR') {
             header("Location: /");
             return;
-
-        } else {
-            header("Location: /");
-            return;
-        }
-
-        if($user->getRole() != "ADMINISTRATOR") {
-            header("Location: /");
-            return;
-
         }
 
         $params['post_img'] = $params['post']['image_post'];
@@ -192,21 +145,9 @@ class AdminPostController
 
     public function update(array $params)
     {
-        $user = array_key_exists('user', $_SESSION) ? unserialize($_SESSION['user']) : null;
-
-        if(!isset($user)) {
+        if(Auth::user()->getRole() != 'ADMINISTRATOR') {
             header("Location: /");
             return;
-
-        } else {
-            header("Location: /");
-            return;
-        }
-
-        if($user->getRole() != "ADMINISTRATOR") {
-            header("Location: /");
-            return;
-
         }
 
         $params['post_img'] = $params['post']['image_post'];
@@ -221,6 +162,7 @@ class AdminPostController
             ->setContent($params['post']['content'])
             ->setCategoryId($params['post']['category_id'])
             ->setImage($params['post_img']['name'])
+            ->setIsValidated($params['post']['is_validated'])
             ->setUpdatedAt(date("Y-m-d H:i:s"));
 
 
@@ -255,21 +197,9 @@ class AdminPostController
 
     public function delete(array $params)
     {
-        $user = array_key_exists('user', $_SESSION) ? unserialize($_SESSION['user']) : null;
-
-        if(!isset($user)) {
+        if(Auth::user()->getRole() != 'ADMINISTRATOR') {
             header("Location: /");
             return;
-
-        } else {
-            header("Location: /");
-            return;
-        }
-
-        if($user->getRole() != "ADMINISTRATOR") {
-            header("Location: /");
-            return;
-
         }
 
         $id = (int)$params['id'];

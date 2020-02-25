@@ -5,6 +5,7 @@ namespace App\Controller;
 
 
 use App\Entity\Category;
+use App\Libs\Auth;
 use App\Libs\Pagination;
 use App\Libs\SessionFlash;
 use App\Render\Twig;
@@ -22,21 +23,9 @@ class AdminCategoryController
 
     public function index(array $params)
     {
-        $user = array_key_exists('user', $_SESSION) ? unserialize($_SESSION['user']) : null;
-
-        if(!isset($user)) {
+        if(Auth::user()->getRole() != 'ADMINISTRATOR') {
             header("Location: /");
             return;
-
-        } else {
-            header("Location: /");
-            return;
-        }
-
-        if($user->getRole() != "ADMINISTRATOR") {
-            header("Location: /");
-            return;
-
         }
 
         $page = $params['get']['page'];
@@ -74,22 +63,11 @@ class AdminCategoryController
 
     public function formCreate()
     {
-        $user = array_key_exists('user', $_SESSION) ? unserialize($_SESSION['user']) : null;
-
-        if(!isset($user)) {
-            header("Location: /");
-            return;
-
-        } else {
+        if(Auth::user()->getRole() != 'ADMINISTRATOR') {
             header("Location: /");
             return;
         }
 
-        if($user->getRole() != "ADMINISTRATOR") {
-            header("Location: /");
-            return;
-
-        }
         $categoryRepository = new CategoryRepository();
         $categories = $categoryRepository->findAll();
 
@@ -103,21 +81,9 @@ class AdminCategoryController
 
     public function formEdit(array $params)
     {
-        $user = array_key_exists('user', $_SESSION) ? unserialize($_SESSION['user']) : null;
-
-        if(!isset($user)) {
+        if(Auth::user()->getRole() != 'ADMINISTRATOR') {
             header("Location: /");
             return;
-
-        } else {
-            header("Location: /");
-            return;
-        }
-
-        if($user->getRole() != "ADMINISTRATOR") {
-            header("Location: /");
-            return;
-
         }
 
         $categoryRepository = new CategoryRepository();
@@ -133,6 +99,11 @@ class AdminCategoryController
 
     public function create(array $params)
     {
+        if(Auth::user()->getRole() != 'ADMINISTRATOR') {
+            header("Location: /");
+            return;
+        }
+
         $category = new Category();
         $category->setTitle($params['post']['title'])
             ->setSlug($params['post']['slug']);
@@ -159,6 +130,11 @@ class AdminCategoryController
 
     public function update(array $params)
     {
+        if(Auth::user()->getRole() != 'ADMINISTRATOR') {
+            header("Location: /");
+            return;
+        }
+
         $categoryRepository = new CategoryRepository();
 
         $categoryEntity = new Category();
@@ -176,6 +152,11 @@ class AdminCategoryController
 
     public function delete(array $params)
     {
+        if(Auth::user()->getRole() != 'ADMINISTRATOR') {
+            header("Location: /");
+            return;
+        }
+
         $id = (int)$params['id'];
 
         $categoryRepository = new CategoryRepository();

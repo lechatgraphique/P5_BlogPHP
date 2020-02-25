@@ -4,6 +4,7 @@
 namespace App\Controller;
 
 
+use App\Libs\Auth;
 use App\Render\Twig;
 
 
@@ -18,21 +19,11 @@ class AdminController
 
     public function index()
     {
-        $user = array_key_exists('user', $_SESSION) ? unserialize($_SESSION['user']) : null;
-
-        if(!isset($user)) {
-            header("Location: /");
-            return;
-
-        } else {
+        if(Auth::user()->getRole() != 'ADMINISTRATOR') {
             header("Location: /");
             return;
         }
 
-        if($user->getRole() != "ADMINISTRATOR") {
-            header("Location: /");
-            return;
-
-        }
+        echo $this->twig->getTwig()->render('backend/dashboard/index.twig', []);
     }
 }
