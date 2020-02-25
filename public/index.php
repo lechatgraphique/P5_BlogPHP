@@ -15,6 +15,7 @@ $router->map('GET', '/articles/[*:slug]-[i:id]', 'App\Controller\PostController#
 $router->map('POST', '/commentaire/create/', 'App\Controller\CommentController#create');
 $router->map('GET', '/commentaire/[i:id]/delete', 'App\Controller\CommentController#delete');
 $router->map('GET', '/contact', 'App\Controller\ContactController#index');
+$router->map('POST', '/contact/send', 'App\Controller\ContactController#send');
 
 $router->map('GET', '/inscription', 'App\Controller\InscriptionController#index');
 $router->map('POST', '/inscription/create/', 'App\Controller\InscriptionController#create');
