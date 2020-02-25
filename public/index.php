@@ -1,13 +1,11 @@
 <?php
 session_start();
-
 require "../vendor/autoload.php";
 
 $whoops = new \Whoops\Run;
 
 $whoops->pushHandler(new \Whoops\Handler\PrettyPageHandler);
 $whoops->register();
-
 
 $router = new AltoRouter();
 
@@ -21,6 +19,8 @@ $router->map('POST', '/inscription/create/', 'App\Controller\InscriptionControll
 
 $router->map('GET', '/connexion', 'App\Controller\ConnexionController#index');
 $router->map('POST', '/connexion/login/', 'App\Controller\ConnexionController#login');
+
+$router->map('GET', '/deconnexion', 'App\Controller\ConnexionController#disconnect');
 
 $router->map('GET', '/dashboard', 'App\Controller\AdminController#index');
 
