@@ -73,7 +73,7 @@ class PostRepository
         $req->bindValue(':description', $post->getDescription());
         $req->bindValue(':content', $post->getContent());
         $req->bindValue(':categoryId', $post->getCategoryId());
-        $req->bindValue(':isValidated', $post->getIsIsValidated());
+        $req->bindValue(':isValidated', $post->getIsValidated());
         $req->bindValue(':image', $post->getImage());
 
         $req->execute();

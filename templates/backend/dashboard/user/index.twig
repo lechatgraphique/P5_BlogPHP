@@ -17,7 +17,6 @@
                 <table class="table table-borderless">
                     <thead>
                     <tr>
-                        <th scope="col">ID</th>
                         <th scope="col">Utilisateur</th>
                         <th scope="col">Rôle</th>
                         <th scope="col" class="text-right">Statut</th>
@@ -27,7 +26,6 @@
                     <tbody>
                     {% for user in users %}
                         <tr>
-                            <td>{{ user.id }}</td>
                             <td>{{ user.userName }}</td>
                             <td>
                                 <span class="badge badge-light">{{ user.role }}</span>

@@ -7,6 +7,7 @@ use App\Entity\Post;
 use App\Libs\Auth;
 use App\Libs\Pagination;
 use App\Libs\SessionFlash;
+use App\Libs\Text;
 use App\Libs\UploadImage;
 use App\Render\Twig;
 use App\Repository\CategoryRepository;
@@ -125,12 +126,13 @@ class AdminPostController
 
         $post = new Post();
         $post->setTitle($params['post']['title'])
-            ->setSlug($params['post']['slug'])
+            ->setSlug(Text::removeAccent($params['post']['title']))
             ->setUserId(1)
             ->setIsValidated(true)
             ->setDescription($params['post']['description'])
             ->setContent($params['post']['content'])
             ->setCategoryId($params['post']['category_id'])
+            ->setIsValidated(1)
             ->setImage($params['post_img']['name']);
 
         $title = $post->getTitle();
