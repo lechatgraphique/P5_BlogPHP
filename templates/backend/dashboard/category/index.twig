@@ -1,52 +1,42 @@
 {% extends 'backend/layouts/default.twig' %}
 
 {% block title %}
-    <title>Blog PHP : Liste des catégories</title>
+    <title>Blog PHP : Gestion des catégories</title>
 {% endblock %}
 
 {% block content %}
-
-    <div class="container-fluid mt-5 pt-5">
-        <div class="row">
-            <div class="col-md-2">
-                {% include 'backend/layouts/adminNavbar.twig' %}
-            </div>
-            <div class="col-md-10">
-                {% include 'backend/layouts/alert.twig' %}
-                <div class="card">
-                    <div class="card-header">
-                        Liste des catégories
-                    </div>
-                    <div class="card-body">
-                        <div class="d-flex justify-content-end mb-3">
-                            <a class="btn btn-primary" href="/dashboard/categories/form-create" role="button">Créer une catégorie</a>
-                        </div>
-                        <table class="table">
-                            <thead class="thead-light">
-                            <tr>
-                                <th scope="col">Catégorie</th>
-                                <th scope="col"></th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            {% for category in categories %}
-                                <tr>
-                                    <th scope="row">
-                                        <a class="btn-link" href="/dashboard/categories/{{ category.slug }}-{{ category.id }}" role="button">{{ category.title }}</a>
-                                    </th>
-                                    <td>
-                                        <a class="btn-link text-danger" href="/dashboard/categories/{{ category.slug }}-{{ category.id }}/delete" role="button"><i class="far fa-trash-alt"></i></a>
-                                    </td>
-                                </tr>
-                            {% endfor %}
-                            </tbody>
-                        </table>
-                        {{ pagination | raw }}
-                    </div>
+    <div class="container pt-5">
+        <h4 class="mt-5 mb-3">Gestion des catégories</h4>
+        {% include 'backend/layouts/alert.twig' %}
+        <div class="card">
+            <div class="card-body">
+                <div class="d-flex justify-content-end mb-3">
+                    <a class="btn btn-primary" href="/dashboard/categories/form-create" role="button">Ajouter une catégorie</a>
+                </div>
+                <table class="table table-borderless">
+                    <thead>
+                    <tr>
+                        <th scope="col">ID</th>
+                        <th scope="col">Nom</th>
+                        <th scope="col" class="text-right">Actions</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for category in categories %}
+                        <tr>
+                            <td>{{ category.id }}</td>
+                            <td>{{ category.title }}</td>
+                            <td class="text-right">
+                                <a class="btn-link text-secondary" href="/dashboard/categories/{{ category.slug }}-{{ category.id }}" role="button"><i class="fas fa-pen"></i></a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+                <div class="d-flex justify-content-end mb-3">
+                    {{ pagination | raw }}
                 </div>
             </div>
         </div>
     </div>
-
-
 {% endblock %}

@@ -1,62 +1,46 @@
 {% extends 'backend/layouts/default.twig' %}
 
 {% block title %}
-    <title>Blog PHP : Liste des articles</title>
+    <title>Blog PHP : Gestion des articles</title>
 {% endblock %}
 
 {% block content %}
-
-<div class="container-fluid mt-5 pt-5">
-    <div class="row">
-        <div class="col-md-2">
-            {% include 'backend/layouts/adminNavbar.twig' %}
-        </div>
-        <div class="col-md-10">
-        {% include 'backend/layouts/alert.twig' %}
-            <div class="card">
-                <div class="card-header">
-                   Liste des articles
-                </div>
-                <div class="card-body">
-                    <div class="d-flex justify-content-end mb-3">
-                        <a class="btn btn-primary" href="/dashboard/articles/form-create" role="button">Créer un article</a>
-                    </div>
-                    <table class="table">
-                        <thead class="thead-light">
-                            <tr>
-                                <th scope="col">Titre</th>
-                                <th scope="col">Catégorie</th>
-                                <th scope="col">Auteur</th>
-                                <th scope="col">Date de création</th>
-                                <th scope="col">Date de modification</th>
-                                <th scope="col"></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {% for post in posts %}
-                            <tr>
-                                <th scope="row">
-                                    <a class="btn-link" href="/dashboard/articles/{{ post.slug }}-{{ post.id }}" role="button">{{ post.title }}</a>
-                                </th>
-                                <td>
-                                    <span class="badge badge-secondary">{{ post.category.title }}</span>
-                                </td>
-                                <td>{{ post.author.firstName }} {{ post.author.lastName | upper }}</td>
-                                <td>{{ post.createdAt | dateFR }}</td>
-                                <td>{% if post.updatedAt %} {{ post.updatedAt | dateFR }} {% endif %}</td>
-                                <td>
-                                    <a class="btn-link text-danger" href="/dashboard/articles/{{ post.slug }}-{{ post.id }}/delete" role="button"><i class="far fa-trash-alt"></i></a>
-                                </td>
-                            </tr>
-                            {% endfor %}
-                        </tbody>
-                    </table>
-                    {{ pagination | raw }}
-                </div>
+<div class="container pt-5">
+    <h4 class="mt-5 mb-3">Gestion des articles</h4>
+    {% include 'backend/layouts/alert.twig' %}
+    <div class="card">
+        <div class="card-body">
+            <div class="d-flex justify-content-end mb-3">
+                <a class="btn btn-primary" href="/dashboard/articles/form-create" role="button">Ajouter un article</a>
+            </div>
+            <table class="table table-borderless">
+                <thead>
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Nom</th>
+                    <th scope="col" class="text-right">Statut</th>
+                    <th scope="col" class="text-right">Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for post in posts %}
+                <tr>
+                    <td>{{ post.id }}</td>
+                    <td>{{ post.title }}</td>
+                    <td class="text-right">
+                        <i class="fas fa-circle fa-xs {% if post.isValidated == false %} text-secondary {% else  %} text-success {% endif %}"></i>
+                    </td>
+                    <td class="text-right">
+                        <a class="btn-link text-secondary" href="/dashboard/articles/{{ post.slug }}-{{ post.id }}" role="button"><i class="fas fa-pen"></i></a>
+                    </td>
+                </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+            <div class="d-flex justify-content-end mb-3">
+                {{ pagination | raw }}
             </div>
         </div>
     </div>
 </div>
-
-
 {% endblock %}

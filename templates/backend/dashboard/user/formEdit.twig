@@ -5,7 +5,6 @@
 {% endblock %}
 
 {% block content %}
-
     <div class="container my-5 pt-5">
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
@@ -54,7 +53,7 @@
             <div class="row my-5">
                 <div class="col-md-6">
                     <div class="form-group">
-                        <label for="image_profil">Image de profil</label>
+                        <label for="image_profil">IMAGE</label>
                         <input type="file" class="form-control" id="image_profil" aria-describedby="profil_help" name="avatar">
                         <small id="profil_help" class="form-text text-muted">Votre image de profil doit être inférieur ou égal à 2 Mo aux formats (jpeg, jpg, png).</small>
                     </div>
@@ -62,16 +61,16 @@
                 </div>
                 <div class="col-md-6">
                     <div class="form-group">
-                        <label>Nom d'utilisateur</label>
+                        <label>EMAIL</label>
                         <input type="hidden" class="form-control" name="username" value="{{ user.username | lower }}" required>
                         <input type="text" class="form-control" name="" value="{{ user.username | lower }}" disabled >
                     </div>
                     <div class="form-group">
-                        <label>Prénom</label>
+                        <label>PRÉNOM</label>
                         <input type="text" class="form-control" name="first_name" value="{{ user.firstName }}" required>
                     </div>
                     <div class="form-group">
-                        <label>Nom</label>
+                        <label>NOM</label>
                         <input type="text" class="form-control" name="last_name" value="{{ user.lastName | upper }}" required>
                     </div>
                 </div>
@@ -80,17 +79,17 @@
             <div class="row my-5">
                 <div class="col-md-6">
                     <div class="form-group">
-                        <label>Ancien mot de passe</label>
+                        <label>ANCIEN MOT DE PASSE</label>
                         <input type="password" class="form-control" name="password" placeholder="••••••••••••••••">
                     </div>
                     <div class="form-group">
-                        <label>Nouveau mot de passe</label>
+                        <label>NOUVEAU MOT DE PASSE</label>
                         <input type="password" class="form-control" name="new_password">
                     </div>
                 </div>
                 <div class="col-md-6 d-flex align-items-end bd-highlight">
                     <div class="form-group flex-fill bd-highlight">
-                        <label>Confirmez le mot de passe</label>
+                        <label>CONFIRMEZ LE MOT DE PASSE</label>
                         <input type="password" class="form-control" name="confirm_password">
                     </div>
                 </div>
@@ -103,5 +102,4 @@
             </div>
         </form>
     </div>
-
 {% endblock %}

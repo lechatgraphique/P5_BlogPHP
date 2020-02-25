@@ -5,19 +5,17 @@
 {% endblock %}
 
 {% block content %}
-
     <div class="container my-5 pt-5">
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="/dashboard">Administration</a></li>
                 <li class="breadcrumb-item"><a href="/dashboard/utilisateurs">Utilisateurs</a></li>
-                <li class="breadcrumb-item active" aria-current="page">Ajouter</li>
+                <li class="breadcrumb-item active" aria-current="page">Nouvel utilisateur</li>
             </ol>
         </nav>
         {% include 'backend/layouts/alert.twig' %}
-        <small>PROFIL</small>
         <h1 class="my-4">Compte</h1>
-        <form action="/dashboard/utilisateurs/create/" method="post"  enctype="multipart/form-data">
+        <form action="/dashboard/utilisateurs/update/" method="post"  enctype="multipart/form-data">
             {% if session.role == 'ADMINISTRATOR' %}
                 <div class="card shadow-sm mb-5 bg-white rounded border-0">
                     <div class="card-body">
@@ -46,26 +44,28 @@
                     </div>
                 </div>
             {% endif %}
+            <input type="hidden" name="id" value="">
             <div class="row my-5">
                 <div class="col-md-6">
                     <div class="form-group">
-                        <label for="image_profil">Image de profil</label>
+                        <label for="image_profil">IMAGE</label>
                         <input type="file" class="form-control" id="image_profil" aria-describedby="profil_help" name="avatar">
                         <small id="profil_help" class="form-text text-muted">Votre image de profil doit être inférieur ou égal à 2 Mo aux formats (jpeg, jpg, png).</small>
                     </div>
+                    <img src="https://escape-artists.com/wp-content/themes/dt-slash/resize.php?get_image=/wp-content/themes/dt-slash/images/noimage.jpg&h=630" alt="Image de profil" class="img-thumbnail" width="200">
                 </div>
                 <div class="col-md-6">
                     <div class="form-group">
-                        <label>Nom d'utilisateur</label>
-                        <input type="email" class="form-control" name="username" required>
+                        <label>EMAIL</label>
+                        <input type="text" class="form-control" name="username" value="" required>
                     </div>
                     <div class="form-group">
-                        <label>Prénom</label>
-                        <input type="text" class="form-control" name="first_name" required>
+                        <label>PRÉNOM</label>
+                        <input type="text" class="form-control" name="first_name" value="" required>
                     </div>
                     <div class="form-group">
-                        <label>Nom</label>
-                        <input type="text" class="form-control" name="last_name" required>
+                        <label>NOM</label>
+                        <input type="text" class="form-control" name="last_name" value="" required>
                     </div>
                 </div>
             </div>
@@ -73,13 +73,13 @@
             <div class="row my-5">
                 <div class="col-md-6">
                     <div class="form-group">
-                        <label>Mot de passe</label>
+                        <label>MOT DE PASSE</label>
                         <input type="password" class="form-control" name="password">
                     </div>
                 </div>
                 <div class="col-md-6 d-flex align-items-end bd-highlight">
                     <div class="form-group flex-fill bd-highlight">
-                        <label>Confirmez le mot de passe</label>
+                        <label>CONFIRMEZ LE MOT DE PASSE</label>
                         <input type="password" class="form-control" name="confirm_password">
                     </div>
                 </div>
@@ -91,5 +91,4 @@
             </div>
         </form>
     </div>
-
 {% endblock %}

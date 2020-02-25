@@ -7,23 +7,55 @@
 
 {% block content %}
 
-<div class="container-fluid mt-5 pt-5">
-    <div class="row">
-        <div class="col-md-2">
+<div class="container mt-5 pt-5">
 
-        </div>
-        <div class="col-md-10">
-            <div class="card">
-                <div class="card-header">
-                    Featured
-                </div>
+    <h3 class="card-title mb-4">Administration</h3>
+
+    <div class="row">
+        <div class="col-md-4">
+            <div class="card text-center mb-3">
                 <div class="card-body">
-                    <h5 class="card-title">Special title treatment</h5>
-                    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                    <a href="#" class="btn btn-primary">Go somewhere</a>
+                    <i class="fas fa-clipboard fa-2x"></i>
+                    <p class="card-text mt-3">With supporting text below as a natural lead-in to additional content.</p>
+                    <a href="/dashboard/articles" class="btn btn-outline-dark">Articles</a>
                 </div>
-                <div class="card-footer text-muted">
-                    2 days ago
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card text-center mb-3">
+                <div class="card-body">
+                    <i class="fas fa-tags fa-2x"></i>
+                    <p class="card-text mt-3">With supporting text below as a natural lead-in to additional content.</p>
+                    <a href="/dashboard/categories" class="btn btn-outline-dark">Catégories</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card text-center mb-3">
+                <div class="card-body">
+                    <i class="fas fa-user-friends fa-2x"></i>
+                    <p class="card-text mt-3">With supporting text below as a natural lead-in to additional content.</p>
+                    <a href="/dashboard/utilisateurs" class="btn btn-outline-dark">Utilisateurs</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4">
+            <div class="card text-center mb-3">
+                <div class="card-body">
+                    <i class="fas fa-comment-alt fa-2x"></i>
+                    <p class="card-text mt-3">With supporting text below as a natural lead-in to additional content.</p>
+                    <a href="/dashboard/commentaires" class="btn btn-outline-dark">Commentaires</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card text-center mb-3">
+                <div class="card-body">
+                    <i class="fas fa-sign-out-alt fa-2x"></i>
+                    <p class="card-text mt-3">With supporting text below as a natural lead-in to additional content.</p>
+                    <a href="/" class="btn btn-outline-dark">Retour au site</a>
                 </div>
             </div>
         </div>

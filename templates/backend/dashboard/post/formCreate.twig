@@ -1,77 +1,73 @@
 {% extends 'backend/layouts/default.twig' %}
 
 {% block title %}
-    <title>Blog PHP : Création article</title>
+    <title>Blog PHP : Ajouter un article</title>
 {% endblock %}
 
 {% block content %}
-
-    <div class="container-fluid mt-5 pt-5">
-        <div class="row">
-            <div class="col-md-2">
-                {% include 'backend/layouts/adminNavbar.twig' %}
-            </div>
-            <div class="col-md-10">
-                {% include 'backend/layouts/alert.twig' %}
-                <div class="card">
-                    <div class="card-header">
-                        Liste des articles
-                    </div>
-                    <form action="/dashboard/articles/create/" method="post"  enctype="multipart/form-data">
-                        <input type="hidden" class="form-control" id="id" name='id'>
-                        <div class="card-body">
-                            <section class=" mt-5">
-                                <div class="row">
-                                    <div class="col-md-5 col-sm-12">
-                                        <div class="form-group mt-3">
-                                            <label>Image</label>
-                                            <div class="custom-file">
-                                                <input type="file" class="custom-file-input" id="imagePost" name="image_post">
-                                                <label class="custom-file-label" for="imagePost">Sélectionner un fichier</label>
-                                                <input type="hidden" name="MAX_FILE_SIZE" value="2000000">
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label>Catégories</label>
-                                            <select class="custom-select" name="category_id">
-                                                {% for category in categories %}
-                                                    <option value="{{ category.id }}" {% if category.id == post.categoryId %} selected {% endif %}>
-                                                        {{ category.title }}
-                                                    </option>
-                                                {% endfor %}
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-7 col-sm-12">
-                                        <div class="form-group">
-                                            <label for="title">Titre de l'article</label>
-                                            <input type="text" class="form-control" id="title" name='title' value="{{ post['post']['title'] }}" required>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="title">Slug</label>
-                                            <input type="text" class="form-control" id="title" name='slug' required>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="chapo">Introduction</label>
-                                            <textarea class="form-control" id="chapo" name='description' rows="2" required></textarea>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="content">Contenu de l'article</label>
-                                            <textarea class="form-control" id="content" rows="10" name="content" required></textarea>
-                                        </div>
+    <div class="container my-5 pt-5">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="/dashboard">Administration</a></li>
+                <li class="breadcrumb-item"><a href="/dashboard/articles">Articles</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Nouvel article</li>
+            </ol>
+        </nav>
+        {% include 'backend/layouts/alert.twig' %}
+        <form action="/dashboard/articles/create/" method="post"  enctype="multipart/form-data">
+            <input type="hidden" class="form-control" id="id" name='id'>
+            <div class="card-body">
+                <section class=" mt-5">
+                    <div class="row">
+                        <div class="col-md-5 col-sm-12">
+                            <div class="form-group">
+                                <label for="picture">IMAGE</label>
+                                <img src="https://escape-artists.com/wp-content/themes/dt-slash/resize.php?get_image=/wp-content/themes/dt-slash/images/noimage.jpg&h=630" class="img-thumbnail img-crop-thumb">
+                                <div class="form-group mt-2">
+                                    <div class="custom-file">
+                                        <input type="file" class="custom-file-input" id="imagePost" name="image_post">
+                                        <label class="custom-file-label" for="imagePost">Sélectionner un fichier</label>
+                                        <input type="hidden" name="MAX_FILE_SIZE" value="100000">
                                     </div>
                                 </div>
-                            </section>
-                        </div>
-                        <div class="card-footer text-muted">
-                            <div class="d-flex justify-content-between">
-                                <button type="submit" class="btn btn-success mr-2">Créer</button>
+                            </div>
+                            <div class="form-group">
+                                <label>CATÉGORIE</label>
+                                <select class="custom-select" name="category_id">
+                                    {% for category in categories %}
+                                        <option value="{{ category.id }}" {% if category.id == post.categoryId %} selected {% endif %}>
+                                            {{ category.title }}
+                                        </option>
+                                    {% endfor %}
+                                </select>
                             </div>
                         </div>
-                    </form>
+                        <div class="col-md-7 col-sm-12">
+                            <div class="form-group">
+                                <label for="title">TITRE</label>
+                                <input type="text" class="form-control" id="title" name='title' value="" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="title">SLUG</label>
+                                <input type="text" class="form-control" id="title" name='slug' value="" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="chapo">INTRODUCTION</label>
+                                <textarea class="form-control" id="chapo" name='description' rows="2" required></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="content">CONTENU</label>
+                                <textarea class="form-control" id="content" rows="10" name="content" required></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+            <div class="row">
+                <div class="col-md-12 d-flex justify-content-end">
+                    <input class="btn btn-primary ml-2" type="submit" value="Enregistrer">
                 </div>
             </div>
-        </div>
+        </form>
     </div>
-
 {% endblock %}
