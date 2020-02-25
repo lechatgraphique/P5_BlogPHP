@@ -19,7 +19,7 @@ class PostRepository
 
     public function findAll(): array
     {
-        $req = $this->db->query('SELECT * FROM post ORDER BY created_at DESC LIMIT 0, 6');
+        $req = $this->db->query('SELECT * FROM post ORDER BY created_at DESC');
 
         $req->execute();
         $req->setFetchMode(PDO::FETCH_CLASS,'App\Entity\Post');
@@ -88,6 +88,7 @@ class PostRepository
                                content = :content,
                                category_id = :categoryId,
                                image = :image,
+                               is_validated = :isValidated,
                                updated_at = :updatedAt
                            WHERE id = :id');
         $req->bindValue(':id', $post->getId());
@@ -97,6 +98,7 @@ class PostRepository
         $req->bindValue(':content', $post->getContent());
         $req->bindValue(':categoryId', $post->getCategoryId());
         $req->bindValue(':image', $post->getImage());
+        $req->bindValue(':isValidated', $post->getIsValidated());
         $req->bindValue(':updatedAt', $post->getUpdatedAt());
 
         $req->execute();

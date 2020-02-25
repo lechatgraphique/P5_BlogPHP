@@ -38,12 +38,11 @@ class UserRepository
         return $req->fetch();
     }
 
-    public function findUser(string $username, string $password): User
+    public function findUser(string $username): User
     {
-        $req = $this->db->prepare('SELECT username, password FROM user WHERE username = :username, password = :password');
+        $req = $this->db->prepare('SELECT * FROM user WHERE username = :username ');
 
         $req->bindValue(':username', $username);
-        $req->bindValue(':password', $password);
         $req->execute();
         $req->setFetchMode(PDO::FETCH_CLASS,'App\Entity\User');
 
