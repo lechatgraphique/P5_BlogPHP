@@ -15,7 +15,7 @@
         </nav>
         {% include 'backend/layouts/alert.twig' %}
         <form action="/dashboard/categories/update/" method="post"  enctype="multipart/form-data">
-            <input type="hidden" class="form-control" id="id" name='id' value="{{ post.id }}">
+            <input type="hidden" class="form-control" id="id" name='id' value="{{ category.id }}">
             <div class="card-body">
                 <section class=" mt-5">
                     <div class="row">

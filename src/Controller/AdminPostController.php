@@ -159,7 +159,7 @@ class AdminPostController
         $postEntity = new Post();
         $post = $postEntity->setId($params['post']['id'])
             ->setTitle($params['post']['title'])
-            ->setSlug($params['post']['slug'])
+            ->setSlug(Text::removeAccent($params['post']['title']))
             ->setDescription($params['post']['description'])
             ->setContent($params['post']['content'])
             ->setCategoryId($params['post']['category_id'])

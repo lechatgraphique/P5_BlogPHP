@@ -141,7 +141,7 @@ class AdminCategoryController
         $categoryEntity = new Category();
         $category = $categoryEntity->setId($params['post']['id'])
             ->setTitle($params['post']['title'])
-            ->setSlug($params['post']['slug']);
+            ->setSlug(Text::removeAccent($params['post']['title']));
 
         $title = $category->getTitle();
 
