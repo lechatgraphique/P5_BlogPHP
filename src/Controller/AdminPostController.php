@@ -213,7 +213,7 @@ class AdminPostController
             $postRepository->delete($post);
 
             if($post->getImage()){
-                unlink('uploads/posts/'.$post->getImage());
+                unlink('uploads/images/'.$post->getImage());
             }
         } else {
             SessionFlash::sessionFlash("danger", "L'article n'existe pas, suppression impossible.");

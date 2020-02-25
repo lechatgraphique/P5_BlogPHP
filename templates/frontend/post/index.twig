@@ -23,7 +23,7 @@
             {% for post in posts %}
             <div class="col-md-4 mb-5">
                 <div class="card h-100">
-                    <img class="card-img-top img-crop-thumb" src="/uploads/posts/{{ post.image }}" alt="{{ post.image }}">
+                    <img class="card-img-top img-crop-thumb" src="/uploads/images/{{ post.image }}" alt="{{ post.image }}">
                     <div class="card-body">
                         <a href="articles/{{ post.slug }}-{{ post.id }}"><h4 class="card-title text-dark">{{ post.title }}</h4></a>
                         <p class="card-text">{{ post.description | truncate(100) }}</p>

@@ -18,7 +18,7 @@ class UploadImage
     public function uploadImage(string $name, int $size, string $tmpName, string $type)
     {
         $currentDir = getcwd();
-        $uploadDirectory = "/uploads/posts/";
+        $uploadDirectory = "/uploads/images/";
 
         $fileExtensions = ['jpeg','jpg','png'];
 

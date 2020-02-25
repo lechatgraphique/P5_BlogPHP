@@ -35,8 +35,7 @@ class AdminCommentController
 
         echo $this->twig->getTwig()->render('backend/dashboard/comment/index.twig', [
             "posts" => $posts,
-
-            "flash" => $flash,
+            "flash" => $flash
 
         ]);
     }

@@ -67,7 +67,7 @@ class PostController
 
     public function show($params)
     {
-
+        $url = 'articles';
         $page = $params['get']['page'];
 
         $postRepository = new PostRepository();
@@ -98,6 +98,7 @@ class PostController
 
         echo $this->twig->getTwig()->render('frontend/post/show.twig', [
             'post' => $post,
+            'url' => $url,
             'comments' => $comments,
             "pagination" => $pagination
         ]);
