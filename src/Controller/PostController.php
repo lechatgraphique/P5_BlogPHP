@@ -20,16 +20,19 @@ class PostController
 
     public function home()
     {
+        $url = 'accueil';
         $postRepository = new PostRepository();
         $posts = $postRepository->findAll();
 
         echo $this->twig->getTwig()->render('frontend/home/index.twig', [
-            'posts' => $posts
+            'posts' => $posts,
+            'url' => $url
         ]);
     }
 
     public function index(array $params)
     {
+        $url = 'articles';
         $page = $params['get']['page'];
 
         $postRepository = new PostRepository();
@@ -57,6 +60,7 @@ class PostController
 
         echo $this->twig->getTwig()->render('frontend/post/index.twig', [
             'posts' => $posts,
+            'url' => $url,
             "pagination" => $pagination
         ]);
     }

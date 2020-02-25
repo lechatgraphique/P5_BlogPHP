@@ -17,6 +17,9 @@ class ContactController
 
     public function index()
     {
-        echo $this->twig->getTwig()->render('frontend/contact/index.twig', []);
+        $url = 'contact';
+        echo $this->twig->getTwig()->render('frontend/contact/index.twig', [
+            'url' => $url
+        ]);
     }
 }
