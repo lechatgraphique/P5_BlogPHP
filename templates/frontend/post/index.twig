@@ -6,40 +6,34 @@
 
 {% block content %}
 
-    <header class="bg-light py-5 mb-5">
-        <div class="container h-100">
-            <div class="row h-100 align-items-center">
-                <div class="col-lg-12">
-                    <h1 class="display-4 mt-5 mb-2">Liste des articles</h1>
-                    <p class="lead mb-5">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab accusantium amet, blanditiis dicta eos eum incidunt laudantium molestias nam neque nostrum odio possimus quaerat quod,
-                        reiciendis repudiandae similique tempora voluptates?</p>
-                </div>
-            </div>
-        </div>
-    </header>
-
-    <div class="container mb-4">
+    <div class="container mt-5 mb-4">
+        <h3 class="mb-2 text-center display-4 font-weight-bold">Tout les articles</h3>
+        <div class="mb-5 text-center section-intro">Le meilleur du développement web</div>
         <div class="row">
             {% for post in posts %}
             <div class="col-md-4 mb-5">
-                <div class="card h-100">
-                    <img class="card-img-top img-crop-thumb" src="/uploads/images/{{ post.image }}" alt="{{ post.image }}">
-                    <div class="card-body">
-                        <a href="articles/{{ post.slug }}-{{ post.id }}"><h4 class="card-title text-dark">{{ post.title }}</h4></a>
-                        <p class="card-text">{{ post.description | truncate(100) }}</p>
-                        {% if post.category %}
-                            <small>
-                                <i class="fas fa-tags"></i> <a class=" btn-link text-dark" href="#" role="button">{{ post.category.title }}</a>
-                            </small>
-                        {% endif %}
-                    </div>
-                    <div class="card-footer">
-                        <small><div>Publié par <b>{{ post.author.firstName }} {{ post.author.lastName }}</b></div></small>
+                <img class="card-img-top img-crop-thumb rounded" src="/uploads/images/{{ post.image }}" alt="{{ post.image }}">
+            </div>
+            <div class="col-md-8">
+                <div class="card-body">
+                    <a href="articles/{{ post.slug }}-{{ post.id }}">
+                        <h4 class="card-title text-theme-primary">
+                            {{ post.title }}
+                            {% if post.category %}
+                                <span class="badge badge-secondary bg-theme-primary">{{ post.category.title }}</span>
+                            {% endif %}
+                        </h4>
+                    </a>
+                    <p class="lead">{{ post.description | truncate(200) }}</p>
+
+                    <p class="lead">
+                        Publié par <b>{{ post.author.firstName }} {{ post.author.lastName }}</b>
+                        <br>
                         <small>
-                            <i class="far fa-calendar-alt"></i> {{ post.createdAt | dateFR }} |
+                            <i class="far fa-calendar-alt"></i> {{ post.createdAt | dateFR | capitalize }} |
                             <i class="far fa-comments"></i> {{ post.comments | length }}
                         </small>
-                    </div>
+                    </p>
                 </div>
             </div>
             {% endfor %}

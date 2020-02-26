@@ -22,7 +22,7 @@ class PostController
     {
         $url = 'accueil';
         $postRepository = new PostRepository();
-        $posts = $postRepository->findAll();
+        $posts = $postRepository->findLast();
 
         echo $this->twig->getTwig()->render('frontend/home/index.twig', [
             'posts' => $posts,

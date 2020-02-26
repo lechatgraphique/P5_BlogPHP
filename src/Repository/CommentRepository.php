@@ -36,7 +36,17 @@ class CommentRepository
         $req->execute();
         $req->setFetchMode(PDO::FETCH_CLASS,Comment::class);
 
-        return $req->fetchAll();
+        $comments = $req->fetchAll();
+
+        foreach ($comments as $comment)
+        {
+            $userRepository = new UserRepository();
+            $comment->setAuthor($userRepository->find($comment->getUserId())); // Créer une function plus tard
+
+        }
+
+        return $comments;
+
     }
 
     public function find($id)

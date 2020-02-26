@@ -1,19 +1,18 @@
 <div class="container mb-5">
     {% for comment in comments %}
-            <div class="media mb-4">
-                <img class="d-flex mr-3 rounded-circle" src="http://placehold.it/50x50" alt="">
-                <div class="media-body">
-                    <h5 class="mt-0">{{ comment.author.firstName }} {{ comment.author.lastName }}</h5>
-                    <small><i class="far fa-calendar-alt"></i> Publié le {{ comment.createdAt | dateFR }}</small>
-                    <hr>
-                    <p>{{ comment.content }}</p>
+        <div class="card mb-2">
+            <div class="card-body">
+                <h5 class="mt-0">{{ comment.author.firstName }} {{ comment.author.lastName }}</h5>
+                <p class="lead">{{ comment.content }}</p>
+                <small>
+                    <i class="far fa-calendar-alt"></i> Publié le {{ comment.createdAt | dateFR |capitalize }} |
                     {% if comment.userId == session.id %}
-                        <td class="text-right">
-                            <a class="btn-link text-danger" href="/commentaire/{{ comment.id }}/delete" role="button"><i class="far fa-trash-alt"></i></a>
-                        </td>
+                        <a class="btn-link text-danger" href="/commentaire/{{ comment.id }}/delete" role="button"><i class="far fa-trash-alt"></i></a>
                     {% endif %}
-                </div>
+                </small>
+
             </div>
+        </div>
     {% endfor %}
     <div class="d-flex justify-content-end mb-3">
         {{ pagination | raw }}

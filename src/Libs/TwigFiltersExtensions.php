@@ -22,7 +22,7 @@ class twigFiltersExtensions extends AbstractExtension
     {
         setlocale(LC_TIME, 'fr_FR');
 
-        return strftime('%e %B %Y %H:%M', strtotime($value));
+        return strftime('%B %Y %H:%M', strtotime($value));
     }
 
     public function truncateString(string $value, string $max): string

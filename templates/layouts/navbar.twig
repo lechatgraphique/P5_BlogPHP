@@ -1,48 +1,46 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
-    <div class="container">
-        <a class="navbar-brand" href="#">Blog PHP</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarResponsive">
-            <ul class="navbar-nav ml-auto">
-                <li class="nav-item {% if url =='accueil' %} active {% endif %}">
-                    <a class="nav-link" href="/">Accueil</a>
-                </li>
-                <li class="nav-item {% if url == 'articles' %} active {% endif %}">
-                    <a class="nav-link" href="/articles">Articles</a>
-                </li>
-                <li class="nav-item {% if url == 'contact' %} active {% endif %}">
-                    <a class="nav-link" href="/contact">Contact</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#"><i class="far fa-file-pdf"></i> CV</a>
-                </li>
-               {%  if session == null  %}
+<nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm p-3">
+    <img src="/uploads/images/logo.svg" width="50" height="50" class="d-inline-block align-top" alt="BlogPHP">Blog PHP
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item {% if url =='accueil' %} active {% endif %}">
+                <a class="nav-link" href="/">Accueil</a>
+            </li>
+            <li class="nav-item {% if url == 'articles' %} active {% endif %}">
+                <a class="nav-link" href="/articles">Articles</a>
+            </li>
+            <li class="nav-item {% if url == 'contact' %} active {% endif %}">
+                <a class="nav-link"href="/contact">Contact</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/uploads/CV_BASTIEN_CLEMENT_2019.pdf"><i class="far fa-file-pdf"></i> CV</a>
+            </li>
+            {%  if session == null  %}
                 <li class="nav-item">
                     <a class="btn btn-outline-light" href="/inscription" role="button">Inscription</a>
                 </li>
                 <li class="nav-item">
                     <a class="btn btn-outline-light ml-2" href="/connexion" role="button"><i class="far fa-user"></i></a>
                 </li>
-               {% else %}
-                   <div class="btn-group ml-2">
-                       <button type="button" class="btn btn-outline-light dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                           <i class="far fa-user"></i>
-                       </button>
-                       <div class="dropdown-menu dropdown-menu-right">
-                           {% if session.role == 'ADMINISTRATOR' %}
-                           <a class="dropdown-item" href="/dashboard"><i class="fas fa-tachometer-alt mr-2"></i>Dashboard</a>
-                           <hr>
-                           {% endif %}
-                           <a class="dropdown-item" href="/profil/{{ session.id }}"><i class="fas fa-user-cog mr-2"></i>Profil</a>
-                           <hr>
-                           <a class="dropdown-item text-danger" href="/deconnexion"><i class="fas fa-sign-out-alt mr-2"></i>Déconnexion</a>
-                       </div>
-                   </div>
-                {% endif %}
-            </ul>
-        </div>
+            {% else %}
+                <div class="btn-group ml-2">
+                    <button type="button" class="btn btn-outline-light text-theme-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="far fa-user"></i>
+                    </button>
+                    <div class="dropdown-menu dropdown-menu-right">
+                        {% if session.role == 'ADMINISTRATOR' %}
+                            <a class="dropdown-item" href="/dashboard"><i class="fas fa-tachometer-alt mr-2"></i>Dashboard</a>
+                            <hr>
+                        {% endif %}
+                        <a class="dropdown-item" href="/profil/{{ session.id }}"><i class="fas fa-user-cog mr-2"></i>Profil</a>
+                        <hr>
+                        <a class="dropdown-item text-danger" href="/deconnexion"><i class="fas fa-sign-out-alt mr-2"></i>Déconnexion</a>
+                    </div>
+                </div>
+            {% endif %}
+        </ul>
     </div>
 </nav>
 
