@@ -27,7 +27,7 @@ class UserRepository
         return $req->fetchAll();
     }
 
-    public function find(int $id): User
+    public function find(int $id)
     {
         $req = $this->db->prepare('SELECT * FROM user WHERE id = :id');
 

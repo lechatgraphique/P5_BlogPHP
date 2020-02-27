@@ -52,8 +52,8 @@ $router->map('GET','/dashboard/commentaires', 'App\Controller\AdminCommentContro
 $router->map('GET','/dashboard/commentaires/[i:id]/delete', 'App\Controller\AdminCommentController#delete');
 $router->map('GET','/dashboard/commentaires/[i:id]/update', 'App\Controller\AdminCommentController#update');
 
-$router->map('GET','/profil', 'App\Controller\ProfilController#index');
-$router->map('GET','/profil/[i:id]/update', 'App\Controller\ProfilController#update');
+$router->map('GET','/profil/[i:id]', 'App\Controller\ProfilController#index');
+$router->map('POST','/profil/update/', 'App\Controller\ProfilController#update');
 
 
 $match = $router->match();

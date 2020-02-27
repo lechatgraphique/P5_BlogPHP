@@ -188,6 +188,11 @@ class AdminUserController
             $verifyPassword = password_verify($password, $currentUser->getPassword());
 
             if($verifyPassword) {
+                if(empty($params['post']['new_password'])) {
+                    SessionFlash::sessionFlash("danger", "Nouveau mot de passe vide.");
+                    header("Location: /dashboard/utilisateurs/$id");
+                    return;
+                }
                 if($params['post']['new_password'] === $params['post']['confirm_password']) {
                     $password = password_hash($params['post']['new_password'], PASSWORD_DEFAULT);
                     $user->setPassword($password);
