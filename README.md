@@ -16,10 +16,10 @@ Projet 5 de mon parcours Développeur d'application PHP/Symfony chez OpenClassro
 
 4) Démarrage du projet en local en pointant sur le dossier racine public/ puis  php -S localhost:8001 -t public/
 
-5) Accès administrateur. Identifiez-vous sur le frontend avec les identifiants suivant : 
+5) Accès administrateur ou utilisateur. Identifiez-vous sur le frontend avec les identifiants suivant : 
       - mail : admin@admin.com
       - pwd : AdminAdmin
-   ou accès en tant qu'utilisateur :
+   
       - mail : user@user.com
       - pwd : UserUser
    
