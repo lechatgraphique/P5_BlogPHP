@@ -21,7 +21,7 @@ class AdminCommentController
         $this->twig = new Twig();
     }
 
-    public function index(array $params)
+    public function index()
     {
         if(Auth::user()->getRole() != 'ADMINISTRATOR') {
             header("Location: /");

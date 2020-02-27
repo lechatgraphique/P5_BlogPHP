@@ -61,7 +61,7 @@ class AdminUserController
         ]);
     }
 
-    public function formCreate(array $params)
+    public function formCreate()
     {
         if(Auth::user()->getRole() != 'ADMINISTRATOR') {
             header("Location: /");

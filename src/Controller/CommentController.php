@@ -39,7 +39,7 @@ class CommentController
         if($currentUser != $comment->getUserId())
         {
             header('Location: /');
-            exit();
+            return;
         }
 
         $postRepository = new PostRepository();

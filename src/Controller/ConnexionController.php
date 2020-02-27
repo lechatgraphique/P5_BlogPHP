@@ -55,7 +55,7 @@ class ConnexionController
         }
     }
 
-    public function disconnect(array $params)
+    public function disconnect()
     {
        Auth::logoff();
        header("Location: /");
