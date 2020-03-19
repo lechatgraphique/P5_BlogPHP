@@ -10,7 +10,7 @@ Projet 5 de mon parcours Développeur d'application PHP/Symfony chez OpenClassro
 
 2) Importer le fichier SQL dans votre base de donnée MySQL :
     
-    - DB_MySQL_Demo.sql est une base de donnée avec un jeu de demo (plusieurs posts, utilisateurs, et commentaires)
+    - DB_MySQL_Demo.sql est une base de donnée avec un jeu de données (plusieurs posts, utilisateurs, et commentaires)
     
 3) Modifier le fichier config/config.php avec vos informations de connexion.
 
