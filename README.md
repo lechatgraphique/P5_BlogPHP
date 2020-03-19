@@ -10,17 +10,16 @@ Projet 5 de mon parcours Développeur d'application PHP/Symfony chez OpenClassro
 
 2) Importer le fichier SQL dans votre base de donnée MySQL :
     
-    - DB_MySQL_Demo.sql est une base de donnée avec un jeu de demo (plusieurs posts, utilisateurs, et commentaires)
+    - DB_MySQL_Demo.sql dans le fichier config/ est une base de donnée avec un jeu de données 
+      (plusieurs posts, utilisateurs,  et commentaires)
     
 3) Modifier le fichier config/config.php avec vos informations de connexion.
 
 4) Démarrage du projet en local en pointant sur le dossier racine public/ puis  php -S localhost:8001 -t public/
 
-5) Accès administrateur ou utilisateur. Identifiez-vous sur le frontend avec les identifiants suivant : 
+5) Accès administrateur. Identifiez-vous sur le frontend avec les identifiants suivant : 
       - mail : admin@admin.com
-      - pwd : AdminAdmin
-   
-      - mail : user@user.com
-      - pwd : UserUser
+      - pwd : admin123
+ 
    
    
