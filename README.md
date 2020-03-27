@@ -1,3 +1,4 @@
+
 <img src="https://image.flaticon.com/icons/svg/321/321773.svg" width="50" title="success">
 <h4>Soutenance du projet a été validé.</h4>
 
