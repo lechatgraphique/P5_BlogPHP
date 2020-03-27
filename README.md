@@ -2,9 +2,7 @@
 <h4>Soutenance du projet a été validé.</h4>
 
 # Créez votre premier blog en PHP
-Projet 2 de mon parcours Développeur d'application PHP/Symfony chez OpenClassrooms. Réalisation d'un site WordPress pour un agence immobilière.
-
-lien : [www.chaletsetcaviar.lechatgraphique.fr](http://chaletsetcaviar.lechatgraphique.fr) Inactif pour l'instant (migration)
+Projet 5 de mon parcours Développeur d'application PHP/Symfony chez OpenClassrooms. Réalisation d'un site PHP pour un BLOG.
 
 ### Informations du projet : 
 
