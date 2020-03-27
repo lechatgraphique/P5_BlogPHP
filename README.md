@@ -1,5 +1,15 @@
-# P5_BlogPHP
-Projet 5 de mon parcours Développeur d'application PHP/Symfony chez OpenClassrooms. Création d'un Blog via une architecture MVC Orienté objet.
+<img src="https://image.flaticon.com/icons/svg/321/321773.svg" width="50" title="success">
+<h4>Soutenance du projet a été validé.</h4>
+
+# Créez votre premier blog en PHP
+Projet 2 de mon parcours Développeur d'application PHP/Symfony chez OpenClassrooms. Réalisation d'un site WordPress pour un agence immobilière.
+
+lien : [www.chaletsetcaviar.lechatgraphique.fr](http://chaletsetcaviar.lechatgraphique.fr) Inactif pour l'instant (migration)
+
+### Informations du projet : 
+
+Ça y est, vous avez sauté le pas ! Le monde du développement web avec PHP est à portée de main et vous avez besoin de visibilité pour pouvoir convaincre vos futurs employeurs/clients en un seul regard. Vous êtes développeur PHP, il est donc temps de montrer vos talents au travers d’un blog à vos couleurs.
+
 
 # Code Quality
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/afab69758dae4b10a92d12be8506e49c)](https://www.codacy.com/manual/lechatgraphique/P5_blogMVC?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=lechatgraphique/P5_blogMVC&amp;utm_campaign=Badge_Grade)
